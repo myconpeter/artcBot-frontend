@@ -8,6 +8,7 @@ import Mine from './pages/Mine'
 import Task from './pages/Task'
 import Refer from './pages/Refer'
 import Wallet from './pages/Wallet'
+import TaskLayout from './layouts/TaskLayout'
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
 
         <Route path='' element={<BotLayout />}>
           <Route path='/mine' element={<Mine />} />
-          <Route path='/task' element={<Task />} />
           <Route path='/refer' element={<Refer />} />
           <Route path='/wallet' element={<Wallet />} />
+
+          <Route path='task' element={<TaskLayout />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
