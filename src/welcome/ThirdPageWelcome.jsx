@@ -2,6 +2,7 @@ import BgThree from '../assets/image/bgThree.png'
 
 import Third from '../assets/image/third.png'
 import Trend from '../assets/icon/trend.gif'
+import { Link } from 'react-router'
 
 const ThirdPageWelcome = () => {
   return (
@@ -22,7 +23,9 @@ const ThirdPageWelcome = () => {
 
         <div className='flex flex-col items-center justify-center mt-3'>
           <img src={Trend} alt='' className='h-10 w-20' />
-          <button className='bg-[#00588D] w-[80%] rounded-3xl text-white px-3 py-2'>MINE $ARCT</button>
+          <Link to='/mine' className='bg-[#00588D] w-[80%] rounded-3xl text-white px-3 py-2 text-center'>
+            MINE $ARCT
+          </Link>{' '}
         </div>
       </div>
 
