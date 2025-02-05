@@ -2,6 +2,7 @@ import BgOne from '../assets/image/bgOne.png'
 import WalletIcon from '../assets/icon/walletIcon.png'
 import PremiumIcon from '../assets/icon/premiumIcon.png'
 import Rate from '../assets/icon/rate.gif'
+import { FaAward } from 'react-icons/fa'
 import { Link } from 'react-router'
 
 const Mine = () => {
@@ -13,7 +14,7 @@ const Mine = () => {
           <p className='text-black font-semibold'>Not connected</p>
         </div>
         <div className='bg-white rounded-2xl  flex items-center justify-center p-2 h-14'>
-          <img src={PremiumIcon} alt='PremiumIcon' />
+          <FaAward className='text-yellow-300 text-2xl font-bold' />
         </div>
       </div>
 

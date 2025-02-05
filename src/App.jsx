@@ -9,6 +9,9 @@ import Task from './pages/Task'
 import Refer from './pages/Refer'
 import Wallet from './pages/Wallet'
 import TaskLayout from './layouts/TaskLayout'
+import SocialTask from './taskPage/SocialTask'
+import RewardTask from './taskPage/RewardTask'
+import PatnerTask from './taskPage/PatnerTask'
 
 function App() {
   return (
@@ -25,7 +28,11 @@ function App() {
           <Route path='/refer' element={<Refer />} />
           <Route path='/wallet' element={<Wallet />} />
 
-          <Route path='task' element={<TaskLayout />}></Route>
+          <Route path='' element={<TaskLayout />}>
+            <Route path='task' index element={<SocialTask />} />
+            <Route path='reward' element={<RewardTask />} />
+            <Route path='partner' element={<PatnerTask />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
