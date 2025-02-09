@@ -12,6 +12,12 @@ import TaskLayout from './layouts/TaskLayout'
 import SocialTask from './taskPage/SocialTask'
 import RewardTask from './taskPage/RewardTask'
 import PatnerTask from './taskPage/PatnerTask'
+import ErrorPage from './pages/ErrorPage'
+import AdminLogin from './AdminPages/AdminLogin'
+import UserPage from './AdminPages/UserPage'
+import TaskPage from './AdminPages/TaskPage'
+import SettingPage from './AdminPages/SettingPage'
+import AdminLayout from './layouts/AdminLayout'
 
 function App() {
   return (
@@ -33,6 +39,13 @@ function App() {
             <Route path='reward' element={<RewardTask />} />
             <Route path='partner' element={<PatnerTask />} />
           </Route>
+        </Route>
+
+        <Route path='/admin' element={<AdminLayout />} errorElement={<ErrorPage />}>
+          <Route index element={<AdminLogin />} />
+          <Route path='user' element={<UserPage />} />
+          <Route path='task' element={<TaskPage />} />
+          <Route path='setting' element={<SettingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
