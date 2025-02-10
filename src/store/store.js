@@ -9,7 +9,7 @@ const useStore = create((set) => ({
   // Fetch user data from the backend
   fetchUser: async (tgUser) => {
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
+      const { data } = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/createUser`, {
         telegramId: tgUser.id,
         username: tgUser.username,
       })
