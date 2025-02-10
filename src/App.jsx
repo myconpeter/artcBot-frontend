@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import useStore from './store/store' // Import Zustand store
 import StartLayout from './layouts/StartLayout'
 import FirstPageWelcome from './welcome/FirstPageWelcome'
 import SecoundPageWelcome from './welcome/SecoundPageWelcome'
@@ -20,6 +22,21 @@ import SettingPage from './AdminPages/SettingPage'
 import AdminLayout from './layouts/AdminLayout'
 
 function App() {
+  const fetchUser = useStore((state) => state.fetchUser)
+
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp
+      tg.expand() // Expands the Telegram Mini App to full screen
+
+      // Fetch user info from Telegram Web App
+      const tgUser = tg.initDataUnsafe?.user
+      if (tgUser) {
+        fetchUser(tgUser)
+      }
+    }
+  }, [fetchUser])
+
   return (
     <BrowserRouter>
       <Routes>
@@ -47,6 +64,8 @@ function App() {
           <Route path='task' element={<TaskPage />} />
           <Route path='setting' element={<SettingPage />} />
         </Route>
+
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   )
