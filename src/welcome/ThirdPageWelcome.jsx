@@ -3,8 +3,21 @@ import BgThree from '../assets/image/bgThree.png'
 import Third from '../assets/image/third.png'
 import Trend from '../assets/icon/trend.gif'
 import { Link } from 'react-router'
+import { useSplashSeenMutation } from '../redux/api/UserEndPoint'
+import { useNavigate } from 'react-router'
 
 const ThirdPageWelcome = () => {
+  const navigate = useNavigate()
+  const [TriggerSplash] = useSplashSeenMutation()
+
+  const handleSplashSeen = async () => {
+    const token = sessionStorage.getItem('token')
+    if (!token) return alert('User not authenticated!')
+
+    await TriggerSplash(token) // Send token with request
+    navigate('/mine', { replace: true }) // Redirect user
+  }
+
   return (
     <div
       style={{ backgroundImage: `url(${BgThree})` }}
@@ -23,9 +36,12 @@ const ThirdPageWelcome = () => {
 
         <div className='flex flex-col items-center justify-center mt-3'>
           <img src={Trend} alt='' className='h-10 w-20' />
-          <Link to='/mine' className='bg-[#00588D] w-[80%] rounded-3xl text-white px-3 py-2 text-center'>
+          <button
+            onClick={handleSplashSeen}
+            className='bg-[#00588D] w-[80%] rounded-3xl text-white px-3 py-2 text-center'
+          >
             MINE $ARCT
-          </Link>{' '}
+          </button>
         </div>
       </div>
 

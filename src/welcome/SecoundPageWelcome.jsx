@@ -44,7 +44,7 @@ const SecoundPageWelcome = () => {
         </div>
 
         <div className='flex items-center justify-center mt-3'>
-          <Link to='/welcome3' className='bg-[#00588D] w-[80%] rounded-3xl text-white px-3 py-2 text-center'>
+          <Link to='/new-comer/pg-3' className='bg-[#00588D] w-[80%] rounded-3xl text-white px-3 py-2 text-center'>
             Ready!
           </Link>
         </div>

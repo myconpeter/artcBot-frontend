@@ -7,8 +7,8 @@ import Amine from '../assets/icon/amine.gif'
 import { NavLink, Outlet } from 'react-router'
 const BotLayout = () => {
   return (
-    <div className=' h-screen'>
-      <nav className='flex justify-around items-center fixed bottom-0 bg-[#00588D] w-screen h-[10%] pt-1'>
+    <div className=' min-h-screen'>
+      <nav className='flex justify-around items-center fixed bottom-0 z-40 bg-[#00588D] w-screen h-[10%] pt-1'>
         <NavLink to='mine'>
           {({ isActive }) => (
             <div className='flex flex-col justify-around'>

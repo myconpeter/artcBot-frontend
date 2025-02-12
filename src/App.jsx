@@ -20,36 +20,44 @@ import UserPage from './AdminPages/UserPage'
 import TaskPage from './AdminPages/TaskPage'
 import SettingPage from './AdminPages/SettingPage'
 import AdminLayout from './layouts/AdminLayout'
+import Splash from './pages/Splash'
+import RouteProtector from './utils/RouteProtector'
+import Start from './pages/Start'
 
 function App() {
-  const fetchUser = useStore((state) => state.fetchUser)
-
-  useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp
-      tg.expand() // Expands the Telegram Mini App to full screen
-
-      // Fetch user info from Telegram Web App
-      const tgUser = tg.initDataUnsafe?.user
-      if (tgUser) {
-        fetchUser(tgUser)
-      }
-    }
-  }, [fetchUser])
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<StartLayout />}>
-          <Route path='/' element={<FirstPageWelcome />} />
-          <Route path='welcome2' element={<SecoundPageWelcome />} />
-          <Route path='welcome3' element={<ThirdPageWelcome />} />
+        <Route path='/splash' element={<Splash />}></Route>
+      </Routes>
+      <Routes>
+        <Route path='/new-comer' element={<StartLayout />}>
+          <Route index element={<FirstPageWelcome />} />
+          <Route path='pg-2' element={<SecoundPageWelcome />} />
+          <Route path='pg-3' element={<ThirdPageWelcome />} />
         </Route>
 
-        <Route path='' element={<BotLayout />}>
-          <Route path='/mine' element={<Mine />} />
-          <Route path='/refer' element={<Refer />} />
-          <Route path='/wallet' element={<Wallet />} />
+        <Route path='/'>
+          <Route
+            index
+            element={
+              <RouteProtector>
+                <Start />
+              </RouteProtector>
+            }
+          />
+
+          <Route
+            element={
+              <RouteProtector>
+                <BotLayout />
+              </RouteProtector>
+            }
+          >
+            <Route path='/mine' element={<Mine />} />
+            <Route path='/refer' element={<Refer />} />
+            <Route path='/wallet' element={<Wallet />} />
+          </Route>
 
           <Route path='' element={<TaskLayout />}>
             <Route path='task' index element={<SocialTask />} />
