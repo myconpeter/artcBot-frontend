@@ -3,21 +3,26 @@ import BaseApi from './BaseApi'
 const UserEndpoint = BaseApi.injectEndpoints({
   endpoints: (builder) => ({
     NewUser: builder.mutation({
-      query: (arg) => ({
+      query: () => ({
         url: '/user/create-user',
         method: 'POST',
-        body: arg,
+        body: { userData: WebApp.initDataUnsafe.user }, // ✅ Send userData
         headers: {
-          'Content-Type': 'application/json', // Ensure correct header
+          'Content-Type': 'application/json',
         },
       }),
     }),
+
     SplashSeen: builder.mutation({
       query: (token) => ({
         url: '/user/splash-seen',
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}` }, // Include token
       }),
+    }),
+    MyInfo: builder.query({
+      query: () => '/user/my-info', // ✅ No body needed for GET
+      providesTags: ['User'],
     }),
 
     BoostingMining: builder.mutation({
@@ -64,4 +69,5 @@ export const {
   useAllUserListQuery,
   usePointTableQuery,
   useFindRefererQuery,
+  useMyInfoQuery,
 } = UserEndpoint

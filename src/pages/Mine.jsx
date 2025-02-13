@@ -4,14 +4,21 @@ import PremiumIcon from '../assets/icon/premiumIcon.png'
 import Rate from '../assets/icon/rate.gif'
 import { FaAward } from 'react-icons/fa'
 import { Link } from 'react-router'
+import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
 const Mine = () => {
+  const { data, isLoading } = useMyInfoQuery()
+  const Wallet = data?.data.MiningAmount
+  const miningPoint = data?.data?.MiningAmount
+
+  // alert(data)
+
   return (
     <div style={{ backgroundImage: `url(${BgOne})` }} className='bg-cover flex flex-col   bg-center h-screen w-full'>
       <div className='mt-5 flex justify-between mx-3 items-center'>
         <div className='bg-white w-fit h-14 flex items-center justify-center gap-4 p-2 rounded-2xl'>
           <img src={WalletIcon} alt='walletIcon' />
-          <p className='text-black font-semibold'>Not connected</p>
+          <p className='text-black font-semibold'>{isLoading ? 'Load' : Wallet}</p>
         </div>
         <div className='bg-white rounded-2xl  flex items-center justify-center p-2 h-14'>
           <FaAward className='text-yellow-300 text-2xl font-bold' />
@@ -20,7 +27,7 @@ const Mine = () => {
 
       <div className='mt-5 flex flex-col items-center justify-center gap-5 '>
         <div className='relative flex flex-col justify-center w-[90%] items-center bg-blue-200 rounded-2xl shadow-2xl shadow-gray-300 py-10'>
-          <p className='font-bold text-4xl'>0.000</p>
+          <p className='font-bold text-4xl'>0.00</p>
           <div className='flex items-center justify-center mt-3'>
             <Link to='#' className='bg-[#00588D]  rounded-3xl text-white px-4 py-3 text-center'>
               Start Mining
@@ -30,7 +37,7 @@ const Mine = () => {
         </div>
         <div className='relative flex flex-col justify-center w-[90%] items-center bg-gray-200 rounded-2xl shadow-2xl shadow-gray-300 py-10'>
           <p className='font-normal text-3xl'>Mined $ARCT</p>
-          <p className='font-bold text-4xl mt-4'>0.000</p>
+          <p className='font-bold text-4xl mt-4'></p>
           <p className='font-normal text-2xl mt-4'>$ARCT Mining rate: 0.001/sec</p>
           <div className='flex items-center justify-center mt-3'>
             <Link to='#' className='bg-[#00588D]  rounded-3xl text-white px-4 py-3 text-center flex'>

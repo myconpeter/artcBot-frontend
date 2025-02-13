@@ -17,7 +17,9 @@ const Splash = () => {
         Username: WebApp.initDataUnsafe.user?.username,
         TgId: WebApp.initDataUnsafe.user?.id,
         role: 'user',
+        TelegramPremiumUser: WebApp.initDataUnsafe.user?.is_premium || false,
         referBy: WebApp.initDataUnsafe.start_param,
+
         init: WebApp.initData,
       }
 
@@ -57,7 +59,7 @@ const Splash = () => {
 
   return (
     <div className='bg-blue-400 min-h-screen flex justify-center items-center'>
-      <h1 className='text-3xl'>Loading...</h1>
+      <h1 className='text-3xl'>Loading.</h1>
       <span className='loading loading-spinner loading-lg'></span>
     </div>
   )
