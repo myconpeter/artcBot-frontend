@@ -7,28 +7,24 @@ const Splash = () => {
   const [triggerNewAccount, { data, isLoading, isSuccess }] = useNewUserMutation()
   const navigate = useNavigate()
 
+  if (data?.data?.token) {
+    sessionStorage.setItem('token', data?.data?.token)
+  }
+
   useEffect(() => {
-    const existingToken = sessionStorage.getItem('token')
-    console.log(`User Token on Load: ${existingToken}`) // ✅ Debugging
+    const Payload = {
+      Name: WebApp.initDataUnsafe.user?.first_name + ' ' + WebApp.initDataUnsafe.user?.last_name,
+      Username: WebApp.initDataUnsafe.user?.username,
+      TgId: WebApp.initDataUnsafe.user?.id,
+      role: 'user',
+      TelegramPremiumUser: WebApp.initDataUnsafe.user?.is_premium || false,
+      referBy: WebApp.initDataUnsafe.start_param,
 
-    if (!existingToken) {
-      const Payload = {
-        Name: WebApp.initDataUnsafe.user?.first_name + ' ' + WebApp.initDataUnsafe.user?.last_name,
-        Username: WebApp.initDataUnsafe.user?.username,
-        TgId: WebApp.initDataUnsafe.user?.id,
-        role: 'user',
-        TelegramPremiumUser: WebApp.initDataUnsafe.user?.is_premium || false,
-        referBy: WebApp.initDataUnsafe.start_param,
-
-        init: WebApp.initData,
-      }
-
-      console.log('New user detected, creating account:', Payload)
-      triggerNewAccount(Payload) // ✅ Trigger new account creation
-    } else {
-      console.log('Existing user, navigating to /mine')
-      navigate('/mine', { replace: true }) // ✅ Navigate immediately if token exists
+      init: WebApp.initData,
     }
+
+    console.log('New user detected, creating account:', Payload)
+    triggerNewAccount(Payload) // ✅ Trigger new account creation
   }, []) // ✅ Runs only on mount
 
   useEffect(() => {

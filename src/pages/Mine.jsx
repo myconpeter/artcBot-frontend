@@ -27,7 +27,7 @@ const Mine = () => {
 
       <div className='mt-5 flex flex-col items-center justify-center gap-5 '>
         <div className='relative flex flex-col justify-center w-[90%] items-center bg-blue-200 rounded-2xl shadow-2xl shadow-gray-300 py-10'>
-          <p className='font-bold text-4xl'>0.00</p>
+          <p className='font-bold text-4xl'>{isLoading ? 'Load' : miningPoint}</p>
           <div className='flex items-center justify-center mt-3'>
             <Link to='#' className='bg-[#00588D]  rounded-3xl text-white px-4 py-3 text-center'>
               Start Mining
