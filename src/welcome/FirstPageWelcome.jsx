@@ -4,8 +4,15 @@ import CoinGrow from '../assets/icon/cionGrow.gif'
 import RocketFly from '../assets/icon/rocketFly.gif'
 import First from '../assets/image/first.png'
 import { Link } from 'react-router'
+import { useFindRefererQuery } from '../redux/api/UserEndPoint'
+
+import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
 const FirstPageWelcome = () => {
+  const { data, isLoading } = useFindRefererQuery()
+  const myRef = data?.data?.findme?.ReferCode
+  console.log('myRef', myRef)
+  console.log(data)
   return (
     <div
       style={{ backgroundImage: `url(${BgOne})` }}

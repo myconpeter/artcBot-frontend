@@ -42,7 +42,7 @@ const UserEndpoint = BaseApi.injectEndpoints({
       // providesTags: ["User", "task"]
     }),
     FindReferer: builder.query({
-      query: () => ({ url: '/user/ReferList', method: 'GET' }),
+      query: () => '/user/ReferList',
       providesTags: ['User'],
     }),
     AllUserList: builder.query({

@@ -4,8 +4,13 @@ import { useNewUserMutation } from '../redux/api/UserEndPoint'
 import { useNavigate } from 'react-router-dom'
 
 const Splash = () => {
-  const [triggerNewAccount, { data, isLoading, isSuccess }] = useNewUserMutation()
+  const [triggerNewAccount, { data, isLoading, isSuccess, status }] = useNewUserMutation()
   const navigate = useNavigate()
+  WebApp.setHeaderColor('#000')
+
+  if (data?.data?.token) {
+    sessionStorage.setItem('token', data?.data?.token)
+  }
 
   if (data?.data?.token) {
     sessionStorage.setItem('token', data?.data?.token)
@@ -14,48 +19,38 @@ const Splash = () => {
   useEffect(() => {
     const Payload = {
       Name: WebApp.initDataUnsafe.user?.first_name + ' ' + WebApp.initDataUnsafe.user?.last_name,
-      Username: WebApp.initDataUnsafe.user?.username,
+      Username: WebApp.initDataUnsafe.user?.username || `guest_${WebApp.initDataUnsafe.user?.id}`,
       TgId: WebApp.initDataUnsafe.user?.id,
-      role: 'user',
       TelegramPremiumUser: WebApp.initDataUnsafe.user?.is_premium || false,
+      role: 'user',
       referBy: WebApp.initDataUnsafe.start_param,
-
       init: WebApp.initData,
     }
 
-    console.log('New user detected, creating account:', Payload)
-    triggerNewAccount(Payload) // ✅ Trigger new account creation
-  }, []) // ✅ Runs only on mount
+    // Trigger account creation only once on mount
+    triggerNewAccount(Payload)
+  }, [])
 
   useEffect(() => {
-    if (isSuccess && data?.data?.token) {
-      console.log('API Response Data:', data) // ✅ Debugging API response
-
-      // ✅ Save the token first
+    if (data?.data?.token) {
       sessionStorage.setItem('token', data.data.token)
-      console.log(`Token Stored: ${data.data.token}`)
 
-      // ✅ Force page to wait before reloading
-      setTimeout(() => {
+      const token = sessionStorage.getItem('token')
+      console.log(data)
+
+      if (!isLoading && token && isSuccess) {
         if (data?.data?.user?.NewComer) {
-          console.log('Redirecting to /new-comer') // ✅ Debugging navigation
           navigate('/new-comer', { replace: true })
         } else {
-          console.log('Redirecting to /mine') // ✅ Debugging navigation
           navigate('/mine', { replace: true })
         }
-
-        // ✅ Force reload after navigation
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
-      }, 500) // Short delay before navigating
+      }
     }
-  }, [isSuccess, data]) // ✅ Runs when API response is received
+  }, [status])
 
   return (
     <div className='bg-blue-400 min-h-screen flex justify-center items-center'>
-      <h1 className='text-3xl'>Loading.</h1>
+      <h1 className='text-3xl'>okk.</h1>
       <span className='loading loading-spinner loading-lg'></span>
     </div>
   )
