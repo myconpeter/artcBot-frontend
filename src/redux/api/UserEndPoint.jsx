@@ -12,6 +12,11 @@ const UserEndpoint = BaseApi.injectEndpoints({
         },
       }),
     }),
+    MyInfo: builder.query({
+      query: () => '/user/my-info', // ✅ No need for `body` in a GET request
+      providesTags: ['User'],
+    }),
+
     SplashSeen: builder.mutation({
       query: (token) => ({
         url: '/user/splash-seen',
@@ -37,7 +42,7 @@ const UserEndpoint = BaseApi.injectEndpoints({
       // providesTags: ["User", "task"]
     }),
     FindReferer: builder.query({
-      query: () => ({ url: '/user/ReferList', method: 'GET' }),
+      query: () => '/user/ReferList',
       providesTags: ['User'],
     }),
     AllUserList: builder.query({
@@ -64,4 +69,5 @@ export const {
   useAllUserListQuery,
   usePointTableQuery,
   useFindRefererQuery,
+  useMyInfoQuery,
 } = UserEndpoint
