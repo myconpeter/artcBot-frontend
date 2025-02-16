@@ -9,10 +9,11 @@ import { useFindRefererQuery } from '../redux/api/UserEndPoint'
 import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
 const FirstPageWelcome = () => {
-  const { data, isLoading } = useFindRefererQuery()
-  const myRef = data?.data?.findme?.ReferCode
-  console.log('myRef', myRef)
+  const { data, isLoading } = useMyInfoQuery()
   console.log(data)
+
+  const wallet = data?.data?.Wallet || 3
+  const miningAmount = data?.data?.MiningAmount || 2
   return (
     <div
       style={{ backgroundImage: `url(${BgOne})` }}

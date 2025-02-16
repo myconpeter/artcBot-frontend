@@ -3,13 +3,10 @@ import BaseApi from './BaseApi'
 const UserEndpoint = BaseApi.injectEndpoints({
   endpoints: (builder) => ({
     NewUser: builder.mutation({
-      query: () => ({
+      query: (args) => ({
         url: '/user/create-user',
         method: 'POST',
-        body: { userData: WebApp.initDataUnsafe.user }, // ✅ Send userData
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        body: args, // ✅ Send userData
       }),
     }),
 

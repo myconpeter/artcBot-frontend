@@ -36,7 +36,7 @@ const Splash = () => {
       sessionStorage.setItem('token', data.data.token)
 
       const token = sessionStorage.getItem('token')
-      console.log(data)
+      console.log('dataaa', data)
 
       if (!isLoading && token && isSuccess) {
         if (data?.data?.user?.NewComer) {

@@ -7,12 +7,16 @@ const RouteProtector = ({ children }) => {
   useEffect(() => {
     if (status === 'fulfilled') {
       console.log(status === 'fulfilled')
+      console.log(!data?.data?.userId)
+
       if (!data?.data?.userId) {
         console.log(!data?.data?.userId)
         window.location.href = '/splash'
       }
     } else if (status === 'rejected') {
       console.log(status === 'rejected')
+      window.location.href = '/splash'
+    } else {
       window.location.href = '/splash'
     }
   }, [status, data])

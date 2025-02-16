@@ -5,23 +5,70 @@ import Rate from '../assets/icon/rate.gif'
 import { FaAward } from 'react-icons/fa'
 import { Link } from 'react-router'
 import { useMyInfoQuery } from '../redux/api/UserEndPoint'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Mine = () => {
   const { data, isLoading } = useMyInfoQuery()
 
   const wallet = data?.data?.Wallet
   const miningAmount = data?.data?.MiningAmount
+  const miningPoint = 2
+  const MiningPremiumUser = data?.data?.MiningPremiumUser
 
   return (
     <div style={{ backgroundImage: `url(${BgOne})` }} className='bg-cover flex flex-col   bg-center h-screen w-full'>
       <div className='mt-5 flex justify-between mx-3 items-center'>
-        <div className='bg-white w-fit h-14 flex items-center justify-center gap-4 p-2 rounded-2xl'>
+        <div className='bg-white w-fit h-10 flex items-center justify-center gap-4 p-2 rounded-2xl'>
           <img src={WalletIcon} alt='walletIcon' />
-          <p className='text-black font-semibold'>{isLoading ? 'loading' : wallet}</p>
+          <p className='text-black'>
+            {isLoading ? 'loading' : wallet.length > 8 ? `${wallet.slice(0, 8)}...` : wallet}
+          </p>
         </div>
-        <div className='bg-white rounded-2xl  flex items-center justify-center p-2 h-14'>
-          <FaAward className='text-yellow-300 text-2xl font-bold' />
-        </div>
+        {isLoading ? (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ repeat: Infinity, duration: 1 }}
+            className='text-gray-500 text-sm'
+          >
+            Loading...
+          </motion.span>
+        ) : (
+          <motion.div
+            animate={{ rotate: [0, -10, 10, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 0.5, repeatDelay: 1.5 }}
+          >
+            <FaAward className={`${MiningPremiumUser ? 'text-yellow-400' : 'text-gray-500'} text-3xl font-bold`} />
+          </motion.div>
+        )}
+
+        {/* Slide In & Out Text */}
+        <AnimatePresence mode='wait'>
+          {!isLoading && MiningPremiumUser && (
+            <motion.div
+              key='premium-text'
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 50, opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className='absolute right-16 px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-sm rounded-xl shadow-md'
+            >
+              Premium User
+            </motion.div>
+          )}
+          {!isLoading && !MiningPremiumUser && (
+            <motion.div
+              key='regular-text'
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 50, opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className='absolute right-12 px-3 py-1 bg-gray-500 text-white text-sm rounded-xl shadow-md'
+            >
+              Regular User
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className='mt-5 flex flex-col items-center justify-center gap-5 '>

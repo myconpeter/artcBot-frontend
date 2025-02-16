@@ -47,13 +47,7 @@ function App() {
             }
           />
 
-          <Route
-            element={
-              <RouteProtector>
-                <BotLayout />
-              </RouteProtector>
-            }
-          >
+          <Route element={<BotLayout />}>
             <Route path='/mine' element={<Mine />} />
             <Route path='/refer' element={<Refer />} />
             <Route path='/wallet' element={<Wallet />} />
