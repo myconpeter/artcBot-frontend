@@ -24,7 +24,7 @@ const HandleTaskClaimLogic = ({ item }) => {
     }
   }
 
-//   window.Telegram.WebApp.showAlert(item.category)
+  //   window.Telegram.WebApp.showAlert(item.category)
 
   return (
     <div className=''>
