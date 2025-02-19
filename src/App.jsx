@@ -37,7 +37,7 @@ function App() {
           <Route path='pg-3' element={<ThirdPageWelcome />} />
         </Route>
 
-        <Route path='/'>
+        <Route path='/' element={<BotLayout />}>
           <Route
             index
             element={

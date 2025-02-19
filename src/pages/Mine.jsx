@@ -16,6 +16,7 @@ const Mine = () => {
   const wallet = data?.data?.Wallet
   const miningAmount = data?.data?.MiningAmount || 0
   const miningPremiumUser = data?.data?.MiningPremiumUser
+  const taskEarning = data?.data?.TaskEarn || 0
   const miningStatus = data?.data?.MiningStatus
   const burnTime = data?.data?.Burn ? new Date(data?.data?.Burn).getTime() : null
   const miningEndTime = data?.data?.MiningEndTime ? new Date(data?.data?.MiningEndTime).getTime() : null
@@ -26,7 +27,7 @@ const Mine = () => {
   const [liveMiningAmount, setLiveMiningAmount] = useState(miningAmount)
   const [isMiningActive, setIsMiningActive] = useState(miningStatus)
   const mineSpeed = 0.1
-  const failToClaim = 1.0
+  const failToClaim = 0
 
   useEffect(() => {
     if (miningStatus && miningStartTime) {
@@ -41,8 +42,9 @@ const Mine = () => {
           const remainingTime = Math.max(miningEndTime - now, 0)
           setCountdown(remainingTime)
 
-          if (remainingTime === 0) {
+          if (remainingTime < 0) {
             clearInterval(interval)
+
             setIsMiningActive(false) // Stop mining when complete
             refetch() // Refresh data when mining ends
           }
@@ -85,13 +87,13 @@ const Mine = () => {
       {' '}
       {/* Wallet Display */}
       <div className='flex justify-between items-center'>
-        <div className='bg-white flex items-center gap-4 p-2 rounded-2xl'>
+        <Link to='/wallet' className='bg-white flex items-center gap-4 p-2 rounded-2xl'>
           <img src={WalletIcon} alt='walletIcon' />
           <p className='text-black'>
             {isLoading ? 'loading' : wallet?.length > 8 ? `${wallet.slice(0, 8)}...` : wallet}
           </p>
-        </div>
-        <PremiumUser />
+        </Link>
+        <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
       {/* Mining Section */}
       <div className='mt-5 flex flex-col items-center gap-5'>
@@ -115,7 +117,7 @@ const Mine = () => {
                   claimFarming({
                     userId: data?.data?._id,
                     amount: liveMiningAmount, // Ensure this matches the backend field
-                  })
+                  }).then(refetch)
                 }}
                 className='bg-green-600 text-white font-bold rounded-3xl px-6 py-3 mt-4 shadow-lg hover:bg-green-700 transition'
               >
@@ -146,7 +148,7 @@ const Mine = () => {
         {/* Mined Amount Section */}
         <div className='relative flex flex-col justify-center w-[90%] items-center bg-gray-200 rounded-2xl shadow-2xl py-10'>
           <p className='font-normal text-3xl'>Mined $ARCT</p>
-          <p className='font-bold text-4xl mt-4'>{isLoading ? 'load..' : miningAmount.toFixed(2)}</p>
+          <p className='font-bold text-4xl mt-4'>{isLoading ? 'load..' : (miningAmount + taskEarning).toFixed(2)}</p>
           <p className='font-normal text-2xl mt-4'>$ARCT Mining rate: 0.1/sec</p>
           <div className='flex items-center justify-center mt-3'>
             <Link to='#' className='bg-[#00588D] rounded-3xl text-white px-4 py-3 text-center flex'>

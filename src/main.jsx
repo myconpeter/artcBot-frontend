@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import ReduxStore from './redux/store.jsx'
 import { Provider } from 'react-redux'
+import { Toaster } from 'react-hot-toast'
 
 const root = document.getElementById('root')
 
@@ -12,6 +13,7 @@ ReactDOM.createRoot(root).render(
   <Provider store={ReduxStore}>
     <StrictMode>
       <App />
+      <Toaster />
     </StrictMode>
   </Provider>
 )

@@ -4,24 +4,21 @@ import CoinGrow from '../assets/icon/cionGrow.gif'
 import RocketFly from '../assets/icon/rocketFly.gif'
 import First from '../assets/image/first.png'
 import { Link } from 'react-router'
-import { useFindRefererQuery } from '../redux/api/UserEndPoint'
+import toast from 'react-hot-toast'
 
 import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
 const FirstPageWelcome = () => {
-  const { data, isLoading } = useMyInfoQuery()
-  console.log(data)
-
-  const wallet = data?.data?.Wallet || 3
-  const miningAmount = data?.data?.MiningAmount || 2
   return (
     <div
       style={{ backgroundImage: `url(${BgOne})` }}
-      className='bg-cover flex flex-col justify-center items-center  bg-center h-screen w-full'
+      className='bg-cover flex flex-col justify-center items-center bg-center h-screen w-full'
     >
-      <div className='flex bg-[#E9E9E9F2] w-[90%] h-[70%] flex-col rounded-2xl shadow-lg shadow-gray-500 '>
+      <div className='flex bg-[#E9E9E9F2] w-[90%] h-[70%] flex-col rounded-2xl shadow-lg shadow-gray-500'>
         <div className='flex items-center justify-center flex-col mt-5'>
-          <p className='font-bold text-3xl'>Mine</p>
+          <p className='font-bold text-3xl cursor-pointer' onClick={() => toast.success('I love you ❤️')}>
+            Mine
+          </p>
           <p className='font-bold text-3xl'>$ARCT token</p>
         </div>
 
@@ -39,7 +36,7 @@ const FirstPageWelcome = () => {
             </div>
 
             <div className='flex items-center justify-center'>
-              <div className='w-[90%]  border-b-2 border-[#88A7B9]'></div>
+              <div className='w-[90%] border-b-2 border-[#88A7B9]'></div>
             </div>
             <div className='flex ml-5 items-center mt-3'>
               <img src={RocketFly} className='h-10 w-10' alt='checkmark' />
@@ -47,7 +44,7 @@ const FirstPageWelcome = () => {
             </div>
 
             <div className='flex items-center justify-center'>
-              <div className='w-[90%]  border-b-2 border-[#88A7B9]'></div>
+              <div className='w-[90%] border-b-2 border-[#88A7B9]'></div>
             </div>
             <div className='flex ml-5 items-center mt-3'>
               <img src={Checkmark} className='h-16 w-10' alt='checkmark' />
@@ -55,7 +52,7 @@ const FirstPageWelcome = () => {
             </div>
 
             <div className='flex items-center justify-center'>
-              <div className='w-[90%]  border-b-2 border-[#88A7B9]'></div>
+              <div className='w-[90%] border-b-2 border-[#88A7B9]'></div>
             </div>
           </div>
         </div>
@@ -67,7 +64,7 @@ const FirstPageWelcome = () => {
         </div>
       </div>
 
-      <img src={First} alt='first' className='mt-3 ' />
+      <img src={First} alt='first' className='mt-3' />
     </div>
   )
 }
