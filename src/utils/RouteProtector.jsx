@@ -1,31 +1,27 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { usePointTableQuery } from '../redux/api/UserEndPoint'
 
 const RouteProtector = ({ children }) => {
+  const navigate = useNavigate()
   const { data, status, isLoading } = usePointTableQuery(undefined)
 
   useEffect(() => {
-    if (status === 'fulfilled') {
-      console.log(status === 'fulfilled')
-      console.log(!data?.data?.userId)
-
-      if (!data?.data?.userId) {
-        console.log(!data?.data?.userId)
-        window.location.href = '/splash'
+    if (!isLoading) {
+      if (status === 'fulfilled' && !data?.data?.userId) {
+        console.log('Redirecting to splash')
+        navigate('/splash') // ✅ Use navigate instead of window.location.href
+      } else if (status === 'rejected') {
+        console.log('Redirecting to splash (error)')
+        navigate('/splash')
       }
-    } else if (status === 'rejected') {
-      console.log(status === 'rejected')
-      window.location.href = '/splash'
-    } else {
-      window.location.href = '/splash'
     }
-  }, [status, data])
+  }, [status, data, isLoading, navigate])
 
   if (isLoading) {
     return (
       <div className='bg-blue-400 min-h-screen flex justify-center items-center'>
-        <h1 className='text-3xl'>From the Protector</h1>
-
+        <h1 className='text-3xl'>Loading...</h1>
         <span className='loading loading-spinner loading-lg'></span>
       </div>
     )

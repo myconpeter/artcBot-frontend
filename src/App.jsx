@@ -28,9 +28,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/splash' element={<Splash />}></Route>
-      </Routes>
-      <Routes>
+        <Route path='/splash' element={<Splash />} />
+
         <Route path='/new-comer' element={<StartLayout />}>
           <Route index element={<FirstPageWelcome />} />
           <Route path='pg-2' element={<SecoundPageWelcome />} />
@@ -46,21 +45,18 @@ function App() {
               </RouteProtector>
             }
           />
+          <Route path='mine' element={<Mine />} />
+          <Route path='refer' element={<Refer />} />
+          <Route path='wallet' element={<Wallet />} />
 
-          <Route element={<BotLayout />}>
-            <Route path='/mine' element={<Mine />} />
-            <Route path='/refer' element={<Refer />} />
-            <Route path='/wallet' element={<Wallet />} />
-          </Route>
-
-          <Route path='' element={<TaskLayout />}>
-            <Route path='task' index element={<SocialTask />} />
+          <Route path='task' element={<TaskLayout />}>
+            <Route index element={<SocialTask />} />
             <Route path='reward' element={<RewardTask />} />
             <Route path='partner' element={<PatnerTask />} />
           </Route>
         </Route>
 
-        <Route path='/admin' element={<AdminLayout />} errorElement={<ErrorPage />}>
+        <Route path='/admin' element={<AdminLayout />}>
           <Route index element={<AdminLogin />} />
           <Route path='user' element={<UserPage />} />
           <Route path='task' element={<TaskPage />} />
