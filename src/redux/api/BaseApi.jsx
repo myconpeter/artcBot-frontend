@@ -10,7 +10,7 @@ const BaseApi = createApi({
     prepareHeaders(headers) {
       const token = sessionStorage.getItem('token')
 
-      headers.set('Authorization', `Bearer ${token || t}`)
+      headers.set('Authorization', `Bearer ${token}`)
     },
   }),
   endpoints: () => ({}),
