@@ -4,7 +4,7 @@ import { usePointTableQuery } from '../redux/api/UserEndPoint'
 
 const RouteProtector = ({ children }) => {
   const navigate = useNavigate()
-  const { data, status, isLoading } = usePointTableQuery(undefined)
+  const { data, status, isLoading } = usePointTableQuery()
 
   useEffect(() => {
     if (!isLoading) {
@@ -12,8 +12,9 @@ const RouteProtector = ({ children }) => {
         console.log('Redirecting to splash')
         navigate('/splash') // ✅ Use navigate instead of window.location.href
       } else if (status === 'rejected') {
-        console.log('Redirecting to splash (error)')
+        console.log('status', status)
         navigate('/splash')
+        console.log('splash')
       }
     }
   }, [status, data, isLoading, navigate])

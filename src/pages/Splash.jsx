@@ -17,6 +17,16 @@ const Splash = () => {
   }
 
   useEffect(() => {
+    WebApp.ready() // Ensure SDK is initialized
+    WebApp.expand() // Expand the Mini App view
+
+    // console.log('initDataUnsafe:', WebApp.initDataUnsafe)
+
+    if (!WebApp.initDataUnsafe || !WebApp.initDataUnsafe.user) {
+      console.error('Telegram WebApp user data is undefined!')
+      return
+    }
+
     const Payload = {
       Name: WebApp.initDataUnsafe.user?.first_name + ' ' + WebApp.initDataUnsafe.user?.last_name,
       Username: WebApp.initDataUnsafe.user?.username || `guest_${WebApp.initDataUnsafe.user?.id}`,
@@ -28,17 +38,20 @@ const Splash = () => {
     }
 
     // Trigger account creation only once on mount
+    // console.log('Sending Payload:', Payload)
     triggerNewAccount(Payload)
   }, [])
 
   useEffect(() => {
+    // console.log('Data from API:', data)
     if (data?.data?.token) {
       sessionStorage.setItem('token', data.data.token)
 
       const token = sessionStorage.getItem('token')
-      console.log('dataaa', data)
+      // console.log('Token:', token)
 
       if (!isLoading && token && isSuccess) {
+        // console.log('Navigating...')
         if (data?.data?.user?.NewComer) {
           navigate('/new-comer', { replace: true })
         } else {
@@ -46,11 +59,11 @@ const Splash = () => {
         }
       }
     }
-  }, [status])
+  }, [data, isSuccess, isLoading, navigate])
 
   return (
     <div className='bg-blue-400 min-h-screen flex justify-center items-center'>
-      <h1 className='text-3xl'>okk.</h1>
+      <h1 className='text-3xl'>Loading...</h1>
       <span className='loading loading-spinner loading-lg'></span>
     </div>
   )

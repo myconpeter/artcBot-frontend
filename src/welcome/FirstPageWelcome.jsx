@@ -9,6 +9,8 @@ import toast from 'react-hot-toast'
 import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
 const FirstPageWelcome = () => {
+  const { data, isLoading, refetch } = useMyInfoQuery()
+  // console.log(data)
   return (
     <div
       style={{ backgroundImage: `url(${BgOne})` }}
