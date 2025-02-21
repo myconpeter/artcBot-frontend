@@ -9,6 +9,7 @@ import PremiumUser from '../component/PremiumUser'
 import BgOne from '../assets/image/bgOne.png'
 import ArcticBgOne from '../component/background/ArcticBgOne'
 import ArcticBgTwo from '../component/background/ArcticBgTwo'
+import { FaShip } from 'react-icons/fa6'
 
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
@@ -81,7 +82,7 @@ const Mine = () => {
 
   return (
     <div className='relative flex flex-col  h-screen w-full overflow-hidden text-white'>
-      {/* <ArcticBgOne /> */}
+      <ArcticBgOne />
       <ArcticBgTwo />
       <div className='flex justify-between items-center'>
         <Link to='/wallet' className='bg-white flex items-center gap-4 p-2 rounded-2xl'>
@@ -91,11 +92,13 @@ const Mine = () => {
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
 
-      <div className='mt-5 flex flex-col items-center gap-5'>
-        <div className='relative flex flex-col justify-center w-[90%] items-center bg-blue-200 rounded-2xl shadow-2xl py-10'>
-          <p className='font-bold text-4xl'>{liveMiningAmount.toFixed(2)}</p>
+      <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
+        <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
+          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-8 bottom-14 text-lg rounded-2xl'>
+            {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
+          </p>
 
-          <div className='flex items-center justify-center mt-3'>
+          <div className='flex mt-3 w-72'>
             {isLoading ? (
               <p>Loading...</p>
             ) : miningStatus && countdown > 0 ? (
@@ -116,22 +119,22 @@ const Mine = () => {
                   setLiveMiningAmount(0) // Reset mined amount
                   refetch()
                 }}
-                className='bg-green-600 text-white font-bold rounded-3xl px-6 py-3 mt-4 shadow-lg hover:bg-green-700 transition'
+                className='bg-[#00D4FF] text-white font-bold rounded-3xl px-6 py-3 mt-4 shadow-lg hover:bg-green-700 transition'
               >
                 Claim Mining
               </div>
             ) : (
               <div
                 onClick={() => startFarming().then(refetch)}
-                className='bg-[#00588D] rounded-3xl text-white px-4 py-3 text-center shadow-lg hover:bg-[#004477] transition'
+                className='fixed bg-transparent outline-1 outline-[#00D4FF] left-10 bottom-14 rounded-3xl text-white px-16 py-2 text-center transition'
               >
-                Start Mining
+                Miner ${import.meta.env.VITE_SYMBOL}
               </div>
             )}
           </div>
 
           {/* Burn Timer */}
-          {!miningPremiumUser && miningStatus && burnCountdown > 0 && countdown <= 0 && (
+          {/* {!miningPremiumUser && miningStatus && burnCountdown > 0 && countdown <= 0 && (
             <p className='text-red-500 text-sm mt-5'>
               Mined will burn if not claimed after {formatTime(burnCountdown)}
             </p>
@@ -139,7 +142,7 @@ const Mine = () => {
 
           {!miningPremiumUser && burnCountdown === 0 && (
             <p className='text-red-500 font-semibold mt-5'>Tokens burned!</p>
-          )}
+          )} */}
         </div>
       </div>
     </div>
