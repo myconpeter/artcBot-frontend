@@ -1,11 +1,10 @@
 import React from 'react'
+import ArcticBgOne from '../component/background/ArcticBgOne'
 
 const Start = () => {
   return (
-    <div className='flex items-center justify-center min-h-screen bg-black'>
-      <div className='text-white text-3xl font-bold'>
-        <p>Arctic Bot Token</p>
-      </div>
+    <div className='relative flex flex-col justify-center items-center h-screen w-full overflow-hidden text-white'>
+      <ArcticBgOne />
     </div>
   )
 }

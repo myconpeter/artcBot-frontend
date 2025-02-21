@@ -7,6 +7,8 @@ import WalletIcon from '../assets/icon/walletIcon.png'
 import Rate from '../assets/icon/rate.gif'
 import PremiumUser from '../component/PremiumUser'
 import BgOne from '../assets/image/bgOne.png'
+import ArcticBgOne from '../component/background/ArcticBgOne'
+import ArcticBgTwo from '../component/background/ArcticBgTwo'
 
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
@@ -78,7 +80,9 @@ const Mine = () => {
   }
 
   return (
-    <div style={{ backgroundImage: `url(${BgOne})` }} className='bg-cover flex flex-col bg-center h-screen w-full'>
+    <div className='relative flex flex-col  h-screen w-full overflow-hidden text-white'>
+      {/* <ArcticBgOne /> */}
+      <ArcticBgTwo />
       <div className='flex justify-between items-center'>
         <Link to='/wallet' className='bg-white flex items-center gap-4 p-2 rounded-2xl'>
           <img src={WalletIcon} alt='walletIcon' />

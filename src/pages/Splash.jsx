@@ -2,6 +2,7 @@ import WebApp from '@twa-dev/sdk'
 import { useEffect } from 'react'
 import { useNewUserMutation } from '../redux/api/UserEndPoint'
 import { useNavigate } from 'react-router-dom'
+import ArcticBgOne from '../component/background/ArcticBgOne'
 
 const Splash = () => {
   const [triggerNewAccount, { data, isLoading, isSuccess, status }] = useNewUserMutation()
@@ -62,9 +63,8 @@ const Splash = () => {
   }, [data, isSuccess, isLoading, navigate])
 
   return (
-    <div className='bg-blue-400 min-h-screen flex justify-center items-center'>
-      <h1 className='text-3xl'>Loading...</h1>
-      <span className='loading loading-spinner loading-lg'></span>
+    <div className='relative flex flex-col justify-center items-center h-screen w-full overflow-hidden text-white'>
+      <ArcticBgOne />
     </div>
   )
 }

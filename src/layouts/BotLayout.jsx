@@ -4,6 +4,11 @@ import Wallet from '../assets/icon/wallet.png'
 import Referral from '../assets/icon/referral.png'
 import Amine from '../assets/icon/amine.gif'
 
+// import { FaTasks } from "react-icons/fa";
+// import { GoHomeFill } from "react-icons/go";
+// import { MdPersonAddAlt1 } from "react-icons/md";
+// import { FaWallet } from "react-icons/fa";
+
 import { NavLink, Outlet } from 'react-router'
 const BotLayout = () => {
   return (
