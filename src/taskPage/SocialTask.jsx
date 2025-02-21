@@ -67,9 +67,6 @@ const SocialTask = () => {
       ) : (
         <p className='text-center text-lg font-semibold mt-5'>No Social Tasks Currently</p>
       )}
-
-      {/* Show this message only if there are no invite tasks */}
-      {!hasInviteTasks && <p className='text-center text-lg font-semibold mt-5'>No Invite Tasks Available</p>}
     </div>
   )
 }

@@ -14,9 +14,7 @@ const Mine = () => {
   const [claimFarming] = useClaimFarmingMutation()
 
   const wallet = data?.data?.Wallet
-  const miningAmount = data?.data?.MiningAmount || 0
   const miningPremiumUser = data?.data?.MiningPremiumUser
-  const taskEarning = data?.data?.TaskEarn || 0
   const miningStatus = data?.data?.MiningStatus
   const burnTime = data?.data?.Burn ? new Date(data?.data?.Burn).getTime() : null
   const miningEndTime = data?.data?.MiningEndTime ? new Date(data?.data?.MiningEndTime).getTime() : null
@@ -24,41 +22,37 @@ const Mine = () => {
 
   const [countdown, setCountdown] = useState(null)
   const [burnCountdown, setBurnCountdown] = useState(null)
-  const [liveMiningAmount, setLiveMiningAmount] = useState(miningAmount)
+  const [liveMiningAmount, setLiveMiningAmount] = useState(0)
   const [isMiningActive, setIsMiningActive] = useState(miningStatus)
-  const mineSpeed = 0.1
-  const failToClaim = 0
+  const mineSpeed = 0.01
+  const totalAmountThatCanBeMined = 0.3
 
   useEffect(() => {
     if (miningStatus && miningStartTime) {
       const interval = setInterval(() => {
         const now = Date.now()
         const timePassed = Math.max(now - miningStartTime, 0) / 1000 // Convert ms to sec
-        const minedTokens = timePassed * mineSpeed
+        let minedTokens = timePassed * mineSpeed
 
-        setLiveMiningAmount(+minedTokens)
+        minedTokens = Math.min(minedTokens, totalAmountThatCanBeMined)
+        setLiveMiningAmount(minedTokens)
 
         if (miningEndTime) {
           const remainingTime = Math.max(miningEndTime - now, 0)
           setCountdown(remainingTime)
 
-          if (remainingTime < 0) {
+          if (remainingTime <= 0) {
             clearInterval(interval)
+            setIsMiningActive(false)
 
-            setIsMiningActive(false) // Stop mining when complete
-            refetch() // Refresh data when mining ends
+            refetch()
           }
-        }
-
-        if (!miningPremiumUser && burnTime) {
-          const burnRemaining = Math.max(burnTime - now, 0)
-          setBurnCountdown(burnRemaining)
         }
       }, 1000)
 
       return () => clearInterval(interval)
     }
-  }, [miningStatus, miningStartTime, miningEndTime, miningAmount, miningPremiumUser, burnTime, refetch])
+  }, [miningStatus, miningStartTime, miningEndTime, refetch])
 
   useEffect(() => {
     if (!miningPremiumUser && burnTime) {
@@ -67,8 +61,9 @@ const Mine = () => {
         const burnRemaining = Math.max(burnTime - now, 0)
         setBurnCountdown(burnRemaining)
 
-        if (burnRemaining === 0) {
-          setLiveMiningAmount(failToClaim) // Reset to 0.10 after burn countdown expires
+        if (burnRemaining <= 0) {
+          setLiveMiningAmount(0)
+          clearInterval(interval)
         }
       }, 1000)
       return () => clearInterval(interval)
@@ -83,22 +78,18 @@ const Mine = () => {
   }
 
   return (
-    <div style={{ backgroundImage: `url(${BgOne})` }} className='bg-cover flex flex-col   bg-center h-screen w-full'>
-      {' '}
-      {/* Wallet Display */}
+    <div style={{ backgroundImage: `url(${BgOne})` }} className='bg-cover flex flex-col bg-center h-screen w-full'>
       <div className='flex justify-between items-center'>
         <Link to='/wallet' className='bg-white flex items-center gap-4 p-2 rounded-2xl'>
           <img src={WalletIcon} alt='walletIcon' />
-          <p className='text-black'>
-            {isLoading ? 'loading' : wallet?.length > 8 ? `${wallet.slice(0, 8)}...` : wallet}
-          </p>
+          <p className='text-black'>{isLoading ? 'loading' : wallet}</p>
         </Link>
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
-      {/* Mining Section */}
+
       <div className='mt-5 flex flex-col items-center gap-5'>
         <div className='relative flex flex-col justify-center w-[90%] items-center bg-blue-200 rounded-2xl shadow-2xl py-10'>
-          <p className='font-bold text-4xl'>{isLoading ? 'Load' : liveMiningAmount.toFixed(2)}</p>
+          <p className='font-bold text-4xl'>{liveMiningAmount.toFixed(2)}</p>
 
           <div className='flex items-center justify-center mt-3'>
             {isLoading ? (
@@ -114,10 +105,12 @@ const Mine = () => {
             ) : miningStatus && miningEndTime && Date.now() >= miningEndTime ? (
               <div
                 onClick={async () => {
-                  claimFarming({
+                  await claimFarming({
                     userId: data?.data?._id,
-                    amount: liveMiningAmount, // Ensure this matches the backend field
-                  }).then(refetch)
+                    amount: liveMiningAmount,
+                  })
+                  setLiveMiningAmount(0) // Reset mined amount
+                  refetch()
                 }}
                 className='bg-green-600 text-white font-bold rounded-3xl px-6 py-3 mt-4 shadow-lg hover:bg-green-700 transition'
               >
@@ -135,7 +128,7 @@ const Mine = () => {
 
           {/* Burn Timer */}
           {!miningPremiumUser && miningStatus && burnCountdown > 0 && countdown <= 0 && (
-            <p className='text-red-500 text-sm  mt-5'>
+            <p className='text-red-500 text-sm mt-5'>
               Mined will burn if not claimed after {formatTime(burnCountdown)}
             </p>
           )}
@@ -143,18 +136,6 @@ const Mine = () => {
           {!miningPremiumUser && burnCountdown === 0 && (
             <p className='text-red-500 font-semibold mt-5'>Tokens burned!</p>
           )}
-        </div>
-
-        {/* Mined Amount Section */}
-        <div className='relative flex flex-col justify-center w-[90%] items-center bg-gray-200 rounded-2xl shadow-2xl py-10'>
-          <p className='font-normal text-3xl'>Mined $ARCT</p>
-          <p className='font-bold text-4xl mt-4'>{isLoading ? 'load..' : (miningAmount + taskEarning).toFixed(2)}</p>
-          <p className='font-normal text-2xl mt-4'>$ARCT Mining rate: 0.1/sec</p>
-          <div className='flex items-center justify-center mt-3'>
-            <Link to='#' className='bg-[#00588D] rounded-3xl text-white px-4 py-3 text-center flex'>
-              Boost mining rate <img src={Rate} alt='rate' className='w-5 h-5 ml-3' />
-            </Link>
-          </div>
         </div>
       </div>
     </div>

@@ -16,7 +16,8 @@ const TaskLayout = () => {
       <div className='flex items-center justify-center'>
         <nav className='flex justify-around items-center bg-white mt-5 py-3 w-[80%] rounded-2xl shadow-sm shadow-gray-500'>
           <NavLink
-            to='task'
+            to='.'
+            end
             className={({ isActive }) =>
               `p-2 px-3 rounded-xl ${isActive ? 'bg-blue-500 text-white' : 'bg-black text-white'}`
             }
