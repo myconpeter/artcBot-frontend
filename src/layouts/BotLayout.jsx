@@ -1,48 +1,42 @@
-import Mine from '../assets/icon/mine.png'
-import Task from '../assets/icon/task.png'
-import Wallet from '../assets/icon/wallet.png'
-import Referral from '../assets/icon/referral.png'
-import Amine from '../assets/icon/amine.gif'
+import { FaTasks, FaWallet } from 'react-icons/fa'
+import { GoHomeFill } from 'react-icons/go'
+import { MdPersonAddAlt1 } from 'react-icons/md'
 
-// import { FaTasks } from "react-icons/fa";
-// import { GoHomeFill } from "react-icons/go";
-// import { MdPersonAddAlt1 } from "react-icons/md";
-// import { FaWallet } from "react-icons/fa";
+import { NavLink, Outlet } from 'react-router-dom'
 
-import { NavLink, Outlet } from 'react-router'
 const BotLayout = () => {
   return (
-    <div className=' min-h-screen'>
-      <nav className='flex justify-around items-center fixed bottom-0 z-40 bg-[#00588D] w-screen h-[10%] pt-1'>
+    <div className='min-h-screen w-[100%] flex items-center justify-center'>
+      <nav className='flex justify-around items-center fixed bottom-0 z-40 bg-[#06111c] w-[80%] h-[10%] pt-2 rounded-2xl'>
         <NavLink to='mine'>
           {({ isActive }) => (
-            <div className='flex flex-col justify-around'>
-              <img src={isActive ? Mine : Mine} alt='mine' className={isActive ? 'h-10 w-10' : 'h-10 w-10'} />
-              <p className='text-white'> Mine</p>
+            <div className='flex flex-col items-center'>
+              <GoHomeFill className={`text-3xl ${isActive ? 'text-[#00D4FF]' : 'text-gray-400'}`} />
+              <p className={isActive ? 'text-white' : 'text-gray-400'}>Mine</p>
             </div>
           )}
         </NavLink>
         <NavLink to='task'>
           {({ isActive }) => (
-            <div className='flex flex-col justify-around'>
-              <img src={isActive ? Task : Task} alt='mine' className={isActive ? 'h-10 w-10' : 'h-10 w-10'} />
-              <p className='text-white'>Task</p>
+            <div className='flex flex-col items-center'>
+              <FaTasks className={`text-3xl ${isActive ? 'text-[#00D4FF]' : 'text-gray-400'}`} />
+              <p className={isActive ? 'text-white' : 'text-gray-400'}>Task</p>
             </div>
           )}
         </NavLink>
         <NavLink to='refer'>
           {({ isActive }) => (
-            <div className='flex flex-col justify-around'>
-              <img src={isActive ? Referral : Referral} alt='mine' className={isActive ? 'h-10 w-10' : 'h-10 w-10'} />
-              <p className='text-white'>Refer</p>
+            <div className='flex flex-col items-center'>
+              <MdPersonAddAlt1 className={`text-3xl ${isActive ? 'text-[#00D4FF]' : 'text-gray-400'}`} />
+              <p className={isActive ? 'text-white' : 'text-gray-400'}>Refer</p>
             </div>
           )}
         </NavLink>
         <NavLink to='wallet'>
           {({ isActive }) => (
-            <div className='flex flex-col justify-around'>
-              <img src={isActive ? Wallet : Wallet} alt='mine' className={isActive ? 'h-10 w-10' : 'h-10 w-10'} />
-              <p className='text-white'>Wallet</p>
+            <div className='flex flex-col items-center'>
+              <FaWallet className={`text-3xl ${isActive ? 'text-[#00D4FF]' : 'text-gray-400'}`} />
+              <p className={isActive ? 'text-white' : 'text-gray-400'}>Wallet</p>
             </div>
           )}
         </NavLink>
