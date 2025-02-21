@@ -35,7 +35,7 @@ const SocialTask = () => {
   const hasInviteTasks = data?.data?.some((task) => task.category === 'invite')
 
   return (
-    <div>
+    <div className='text-black'>
       {isLoading ? (
         <div className='flex flex-col gap-3'>
           <TaskSkeleton />
@@ -44,10 +44,10 @@ const SocialTask = () => {
         </div>
       ) : nonInviteTasks.length > 0 ? (
         <div className='flex justify-center items-center'>
-          <div className='bg-[#D9EEFB] mt-5 w-[95%] py-5 px-1 flex flex-col gap-4 rounded-2xl shadow-2xl shadow-gray-300'>
+          <div className=' mt-5 w-[95%] py-1 px-1 flex flex-col gap-4 '>
             {nonInviteTasks.map((task) => (
               <div key={task._id} className='relative flex justify-center items-center'>
-                <div className='relative bg-white p-3 w-[68%] flex gap-4 ml-5 pl-5 items-center rounded-l-2xl shadow-lg shadow-gray-500'>
+                <div className='relative bg-white p-1 w-[68%] flex gap-4 ml-5 pl-5 items-center rounded-l-2xl shadow-lg shadow-gray-500'>
                   {getTaskIcon(task.category)}
                   <div>
                     <p className='text-lg font-semibold'>{task.title}</p>
@@ -57,7 +57,7 @@ const SocialTask = () => {
                   </div>
                 </div>
 
-                <div className='relative bg-black p-3 w-[18%] h-18 flex gap-4 ml-2 items-center justify-center rounded-r-2xl shadow-lg shadow-gray-500'>
+                <div className='relative bg-[#00D4FF] p-1 w-[18%] h-12  flex gap-4 ml-2 items-center justify-center rounded-r-2xl shadow-lg shadow-gray-500'>
                   <HandleTaskClaimLogic item={task} />
                 </div>
               </div>
@@ -65,7 +65,7 @@ const SocialTask = () => {
           </div>
         </div>
       ) : (
-        <p className='text-center text-lg font-semibold mt-5'>No Social Tasks Currently</p>
+        <p className='text-center text-lg font-semibold mt-10'>No Social Tasks Currently</p>
       )}
     </div>
   )

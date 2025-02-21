@@ -105,7 +105,7 @@ const Mine = () => {
 
           <div className='flex mt-3 w-72'>
             {isLoading ? (
-              <p>Loading...</p>
+              <p> </p>
             ) : miningStatus && countdown > 0 ? (
               <motion.div
                 className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-16 bottom-18 rounded-xl text-white px-14 py-2 text-center transition font-bold'

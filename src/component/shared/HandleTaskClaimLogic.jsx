@@ -32,22 +32,22 @@ const HandleTaskClaimLogic = ({ item }) => {
       {isProgressForClaim ? (
         <div className='h-5 w-5 border-4 border-white border-dashed rounded-full animate-spin'></div>
       ) : isClaim ? (
-        <button className='text-lg font-semibold  text-blue-400' onClick={Claim}>
-          Claim
+        <button className='text-lg font-semibold  text-black' onClick={Claim}>
+          ✔ Claim
         </button>
       ) : item?.category !== 'read' ? (
         item?.category === 'invite' ? (
-          <button className='text-lg font-semibold text-white' onClick={Claim}>
+          <button className='flex text-lg font-semibold text-black' onClick={Claim}>
             Check
           </button>
         ) : item?.category === 'earn' ? (
-          <button className='text-lg font-semibold text-white' onClick={Claim}>
-            Check Income
+          <button className='text-lg font-semibold text-black' onClick={Claim}>
+            Check
           </button>
         ) : (
           <a
             href={item.link}
-            className='text-lg font-semibold text-white'
+            className='text-lg font-semibold text-black'
             target='_blank'
             rel='noopener noreferrer'
             onClick={() => {
@@ -62,7 +62,7 @@ const HandleTaskClaimLogic = ({ item }) => {
           </a>
         )
       ) : (
-        <button className='text-lg font-semibold text-white' onClick={() => setReadClaim(true)}>
+        <button className='text-lg font-semibold text-black' onClick={() => setReadClaim(true)}>
           Start
         </button>
       )}
