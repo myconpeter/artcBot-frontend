@@ -24,8 +24,8 @@ const Mine = () => {
   const [burnCountdown, setBurnCountdown] = useState(null)
   const [liveMiningAmount, setLiveMiningAmount] = useState(0)
   const [isMiningActive, setIsMiningActive] = useState(miningStatus)
-  const mineSpeed = 0.01
-  const totalAmountThatCanBeMined = 0.3
+  const mineSpeed = data?.data?.miningLevel
+  const totalAmountThatCanBeMined = 100
 
   useEffect(() => {
     if (miningStatus && miningStartTime) {

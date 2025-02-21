@@ -5,6 +5,7 @@ import RocketFly from '../assets/icon/rocketFly.gif'
 import First from '../assets/image/first.png'
 import { Link } from 'react-router'
 import toast from 'react-hot-toast'
+import ArcticBgOne from '../component/background/ArcticBgOne'
 
 import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
@@ -12,11 +13,9 @@ const FirstPageWelcome = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
   // console.log(data)
   return (
-    <div
-      style={{ backgroundImage: `url(${BgOne})` }}
-      className='bg-cover flex flex-col justify-center items-center bg-center h-screen w-full'
-    >
-      <div className='flex bg-[#E9E9E9F2] w-[90%] h-[70%] flex-col rounded-2xl shadow-lg shadow-gray-500'>
+    <div className='bg-cover flex flex-col justify-center items-center bg-center h-screen w-full'>
+      <ArcticBgOne className='h-screen' />
+      <div className='flex bg-transparent w-[90%] h-[70%] flex-col rounded-2xl shadow-lg shadow-gray-500'>
         <div className='flex items-center justify-center flex-col mt-5'>
           <p className='font-bold text-3xl cursor-pointer' onClick={() => toast.success('I love you ❤️')}>
             Mine
