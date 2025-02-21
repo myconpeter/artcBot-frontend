@@ -10,15 +10,13 @@ const PremiumUser = ({ isLoading, miningPremiumUser }) => {
           animate={{ opacity: [0, 1, 0] }}
           transition={{ repeat: Infinity, duration: 1 }}
           className='text-gray-500 text-sm'
-        >
-          Loading...
-        </motion.span>
+        ></motion.span>
       ) : (
         <motion.div
           animate={{ rotate: [0, -10, 10, -10, 0] }}
           transition={{ repeat: Infinity, duration: 0.5, repeatDelay: 1.5 }}
         >
-          <FaAward className={`${miningPremiumUser ? 'text-yellow-400' : 'text-gray-500'} text-3xl font-bold`} />
+          <FaAward className={`${miningPremiumUser ? 'text-[#00D4FF]' : 'text-gray-100'} text-3xl font-bold`} />
         </motion.div>
       )}
 
@@ -32,7 +30,7 @@ const PremiumUser = ({ isLoading, miningPremiumUser }) => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 20, opacity: 0 }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
-              className='px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-sm rounded-xl shadow-md'
+              className='px-3 py-1 bg-[#00D4FF] text-black font-semibold text-sm rounded-xl shadow-md mr-3'
             >
               Premium User
             </motion.div>
@@ -44,9 +42,9 @@ const PremiumUser = ({ isLoading, miningPremiumUser }) => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 20, opacity: 0 }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
-              className='px-3 py-1 bg-gray-500 text-white text-sm rounded-xl shadow-md'
+              className='px-3 py-1 bg-gray-100 font-semibold text-black text-sm rounded-xl shadow-md mr-3'
             >
-              Regular User
+              Regular miner
             </motion.div>
           )}
         </AnimatePresence>

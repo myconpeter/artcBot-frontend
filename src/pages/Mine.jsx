@@ -4,12 +4,14 @@ import { useStartFarmingMutation, useClaimFarmingMutation } from '../redux/api/F
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import WalletIcon from '../assets/icon/walletIcon.png'
-import Rate from '../assets/icon/rate.gif'
 import PremiumUser from '../component/PremiumUser'
-import BgOne from '../assets/image/bgOne.png'
 import ArcticBgOne from '../component/background/ArcticBgOne'
 import ArcticBgTwo from '../component/background/ArcticBgTwo'
 import { FaShip } from 'react-icons/fa6'
+import { FaClock } from 'react-icons/fa'
+import { FaHandHoldingUsd } from 'react-icons/fa'
+import { GiDigDug } from 'react-icons/gi'
+import toast from 'react-hot-toast'
 
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
@@ -22,12 +24,13 @@ const Mine = () => {
   const burnTime = data?.data?.Burn ? new Date(data?.data?.Burn).getTime() : null
   const miningEndTime = data?.data?.MiningEndTime ? new Date(data?.data?.MiningEndTime).getTime() : null
   const miningStartTime = data?.data?.MiningStartTime ? new Date(data?.data?.MiningStartTime).getTime() : null
+  const username = data?.data?.Username || ' '
 
   const [countdown, setCountdown] = useState(null)
   const [burnCountdown, setBurnCountdown] = useState(null)
   const [liveMiningAmount, setLiveMiningAmount] = useState(0)
   const [isMiningActive, setIsMiningActive] = useState(miningStatus)
-  const mineSpeed = data?.data?.miningLevel
+  const mineSpeed = 0.01
   const totalAmountThatCanBeMined = 100
 
   useEffect(() => {
@@ -77,24 +80,26 @@ const Mine = () => {
     const seconds = Math.floor((ms / 1000) % 60)
     const minutes = Math.floor((ms / 1000 / 60) % 60)
     const hours = Math.floor(ms / 1000 / 3600)
-    return `${hours}h ${minutes}m ${seconds}s`
+    return `${hours}: ${minutes}: ${seconds}`
   }
 
   return (
     <div className='relative flex flex-col  h-screen w-full overflow-hidden text-white'>
-      <ArcticBgOne />
+      {/* <ArcticBgOne /> */}
       <ArcticBgTwo />
-      <div className='flex justify-between items-center'>
-        <Link to='/wallet' className='bg-white flex items-center gap-4 p-2 rounded-2xl'>
-          <img src={WalletIcon} alt='walletIcon' />
-          <p className='text-black'>{isLoading ? 'loading' : wallet}</p>
-        </Link>
+      <div className='flex justify-between items-center mt-2'>
+        <div className=' flex items-center gap-2 p-2 rounded-2xl'>
+          <div className='bg-gray-100 h-10 w-10 flex items-center justify-center rounded-2xl'>
+            <FaShip className=' text-black text-2xl' />
+          </div>
+          <p className='text-white font-semibold'>{isLoading ? ' ' : username}</p>
+        </div>
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-8 bottom-14 text-lg rounded-2xl'>
+          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-14 bottom-18 text-lg rounded-2xl'>
             {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
           </p>
 
@@ -103,11 +108,12 @@ const Mine = () => {
               <p>Loading...</p>
             ) : miningStatus && countdown > 0 ? (
               <motion.div
-                className='bg-[#00588D] rounded-3xl text-white px-4 py-1 text-center'
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-16 bottom-18 rounded-xl text-white px-14 py-2 text-center transition font-bold'
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ repeat: Infinity, duration: 1 }}
               >
-                Mining {formatTime(countdown)}
+                <FaClock className='mt-1' />
+                Get after <span className='text-[#00D4FF] font-bold'>{formatTime(countdown)}</span>
               </motion.div>
             ) : miningStatus && miningEndTime && Date.now() >= miningEndTime ? (
               <div
@@ -116,33 +122,41 @@ const Mine = () => {
                     userId: data?.data?._id,
                     amount: liveMiningAmount,
                   })
-                  setLiveMiningAmount(0) // Reset mined amount
+                  setLiveMiningAmount(0)
+                  toast.success('Claim Successful 😃') // Reset mined amount
                   refetch()
                 }}
-                className='bg-[#00D4FF] text-white font-bold rounded-3xl px-6 py-3 mt-4 shadow-lg hover:bg-green-700 transition'
+                className='fixed flex gap-2  bg-[#00D4FF] outline-1 outline-white left-16 bottom-18  text-black px-16 py-2 text-center transition font-bold rounded-xl'
               >
+                <FaHandHoldingUsd className='mt-1' />
                 Claim Mining
               </div>
             ) : (
               <div
-                onClick={() => startFarming().then(refetch)}
-                className='fixed bg-transparent outline-1 outline-[#00D4FF] left-10 bottom-14 rounded-3xl text-white px-16 py-2 text-center transition'
+                onClick={() =>
+                  startFarming().then(() => {
+                    refetch()
+                    toast.success('Mining started 😃')
+                  })
+                }
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-16 bottom-18  text-white px-16 py-2 text-center transition font-bold rounded-xl'
               >
-                Miner ${import.meta.env.VITE_SYMBOL}
+                <GiDigDug className='text-[#00D4FF] font-bold mt-1' />
+                Mine <span className='text-[#00D4FF] font-bold'>${import.meta.env.VITE_SYMBOL}</span>
               </div>
             )}
           </div>
 
           {/* Burn Timer */}
-          {/* {!miningPremiumUser && miningStatus && burnCountdown > 0 && countdown <= 0 && (
-            <p className='text-red-500 text-sm mt-5'>
+          {!miningPremiumUser && miningStatus && burnCountdown > 0 && countdown <= 0 && (
+            <p className='fixed bottom-32 left-16  text-red-500 text-sm mt-5'>
               Mined will burn if not claimed after {formatTime(burnCountdown)}
             </p>
           )}
 
           {!miningPremiumUser && burnCountdown === 0 && (
-            <p className='text-red-500 font-semibold mt-5'>Tokens burned!</p>
-          )} */}
+            <p className='fixed left-10 bottom-32 text-center text-red-500 font-semibold mt-5'>Tokens burned!</p>
+          )}
         </div>
       </div>
     </div>
