@@ -99,7 +99,7 @@ const Mine = () => {
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10` bottom-24 text-lg rounded-2xl'>
+          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10 bottom-24 text-lg rounded-2xl'>
             {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
           </p>
 

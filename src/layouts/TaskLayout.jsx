@@ -10,8 +10,8 @@ const TaskLayout = () => {
         <img src={TaskAnimate} alt='task' className='h-14 w-14 bg-[#00588D] p-3 rounded-xl' />
 
         <div className='flex flex-col items-center relative top-2'>
-          <p className='font-bold text-black text-4xl'>Tasks</p>
-          <p className='text-xl mt-3'>
+          <p className='font-bold text-black text-2xl'>Tasks</p>
+          <p className='text-lg mt-3'>
             Complete Tasks To Earn More <span className='text-[#00D4FF] font-bold'></span> $
             {import.meta.env.VITE_SYMBOL}
           </p>

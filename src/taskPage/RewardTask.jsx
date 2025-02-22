@@ -9,21 +9,21 @@ import HandleTaskClaimLogic from '../component/shared/HandleTaskClaimLogic'
 const getTaskIcon = (category) => {
   switch (category) {
     case 'visit':
-      return <FaMousePointer className='text-2xl text-black rounded-2xl' />
+      return <FaMousePointer className='text-sm text-black rounded-2xl' />
     case 'x':
-      return <FaXTwitter className='text-2xl text-black rounded-2xl' />
+      return <FaXTwitter className='text-sm text-black rounded-2xl' />
     case 'read':
-      return <FaBookReader className='text-2xl text-black rounded-2xl' />
+      return <FaBookReader className='text-sm text-black rounded-2xl' />
     case 'telegram':
-      return <FaTelegramPlane className='text-2xl text-blue-600 rounded-2xl' />
+      return <FaTelegramPlane className='text-sm text-blue-600 rounded-2xl' />
     case 'invite':
-      return <FaUserFriends className='text-2xl text-black rounded-2xl' />
+      return <FaUserFriends className='text-sm text-black rounded-2xl' />
     case 'youtube':
-      return <FaYoutube className='text-2xl text-red-700 rounded-2xl' />
+      return <FaYoutube className='text-sm text-red-700 rounded-2xl' />
     case 'boost':
-      return <GiUpgrade className='text-2xl text-black rounded-2xl' />
+      return <GiUpgrade className='text-sm text-black rounded-2xl' />
     default:
-      return <MdAddTask className='text-2xl text-black rounded-2xl' />
+      return <MdAddTask className='text-sm text-black rounded-2xl' />
   }
 }
 
@@ -49,8 +49,8 @@ const RewardTask = () => {
                 <div className='relative bg-white p-1 w-[68%] flex gap-4 ml-5 pl-5 items-center rounded-l-2xl shadow-lg shadow-gray-500'>
                   {getTaskIcon(task.category)}
                   <div>
-                    <p className='text-lg font-semibold'>{task.title}</p>
-                    <p className='text-md'>
+                    <p className='text-sm font-semibold'>{task.title}</p>
+                    <p className='text-xs'>
                       +{task.point} {import.meta.env.VITE_SYMBOL}
                     </p>
                   </div>
