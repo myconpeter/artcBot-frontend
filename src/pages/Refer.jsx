@@ -63,7 +63,7 @@ const Refer = () => {
         </div>
 
         <button
-          className={` fixed bottom-18 p-3 px-28 ml-2 text-black font-bold text-xl rounded-xl   transition-all duration-300 mt-4 ${
+          className={` fixed bottom-24 p-3 px-20 ml-2 text-black font-bold text-xl rounded-xl   transition-all duration-300 mt-4 ${
             copied ? 'bg-green-500' : 'bg-[#00D4FF]'
           }`}
           onClick={handleCopy}
@@ -75,10 +75,10 @@ const Refer = () => {
       <div className='flex justify-center items-center '>
         <div className='bg mt-5 w-[95%] py-5 px-1 flex flex-col gap-4'>
           <div className='relative p-2 w-[80%]  flex gap-4 ml-5 items-center'>
-            <IoGiftOutline className='text-5xl bg-[#00D4FF] p-2 text-white rounded-2xl' />
+            <IoGiftOutline className='text-2xl bg-[#00D4FF] p-2 text-white rounded-2xl' />
             <div>
-              <p className='text-lg font-semibold text-gray-400'>Refer Friends</p>
-              <p className='text-md text-gray-400'>
+              <p className='text-sm font-semibold text-gray-400'>Refer Friends</p>
+              <p className='text-sm text-gray-400'>
                 + {import.meta.env.VITE_NORMAL_TG_USER}{' '}
                 <span className='text-[#00D4FF] font-bold'>${import.meta.env.VITE_SYMBOL}</span> for you{' '}
               </p>
@@ -86,10 +86,10 @@ const Refer = () => {
           </div>
 
           <div className='relative  p-2 w-[80%]  flex gap-4 ml-5 items-center'>
-            <IoGiftOutline className='text-5xl bg-[#00D4FF] p-2 text-white rounded-2xl' />
+            <IoGiftOutline className='text-2xl bg-[#00D4FF] p-2 text-white rounded-2xl' />
             <div>
-              <p className='text-lg font-semibold text-gray-400'>Refer Premium Friends</p>
-              <p className='text-md text-gray-400'>
+              <p className='text-sm font-semibold text-gray-400'>Refer Premium Friends</p>
+              <p className='text-sm text-gray-400'>
                 +{import.meta.env.VITE_PREMIUM_TG_USER}{' '}
                 <span className='text-[#00D4FF] font-bold'>${import.meta.env.VITE_SYMBOL}</span> for you
               </p>

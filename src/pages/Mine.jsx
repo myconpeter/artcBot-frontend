@@ -99,7 +99,7 @@ const Mine = () => {
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-14 bottom-18 text-lg rounded-2xl'>
+          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10` bottom-24 text-lg rounded-2xl'>
             {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
           </p>
 
@@ -139,7 +139,7 @@ const Mine = () => {
                     toast.success('Mining started 😃')
                   })
                 }
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-16 bottom-18  text-white px-16 py-2 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-2 text-center transition font-bold rounded-xl'
               >
                 <GiDigDug className='text-[#00D4FF] font-bold mt-1' />
                 Mine <span className='text-[#00D4FF] font-bold'>${import.meta.env.VITE_SYMBOL}</span>
