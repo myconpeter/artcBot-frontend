@@ -31,7 +31,7 @@ const Mine = () => {
   const miningStartTime = data?.data?.MiningStartTime ? new Date(data?.data?.MiningStartTime).getTime() : null
   const username = data?.data?.Username || ' '
 
-  const allBalance = miningAmount + taskEarn + referralPoint
+  const allBalance = miningAmount + taskEarn + referralPoint || 0
 
   const [countdown, setCountdown] = useState(null)
   const [burnCountdown, setBurnCountdown] = useState(null)
@@ -113,11 +113,11 @@ const Mine = () => {
       <div className='flex justify-center items-center mt-3 '>
         <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-32 rounded-xl text-black'>
           <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
-            Totall <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
+            Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
           </p>
           <div className='flex items-center justify-center gap-3'>
             <FaShip className=' text-black text-3xl' />
-            <p className=' text-3xl font-semibold text-[#00D4FF]'>{allBalance}</p>
+            <p className=' text-3xl font-semibold text-[#00D4FF]'>{isLoading ? ' ' : allBalance}</p>
           </div>
 
           <div className='flex items-center justify-center'>
@@ -125,8 +125,9 @@ const Mine = () => {
               <p className='text-sm font-semibold text-gray-400'>
                 <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> per seconds
               </p>
-              <p className='text-sm flex'>
-                <FaShip className=' text-[#00D4FF] text-sm font-semibold' /> <p className='font-bold'>{mineSpeed}</p>
+              <p className='text-sm flex gap-1'>
+                <FaShip className=' text-[#00D4FF] text-sm font-semibold mt-0.5' />{' '}
+                <p className='font-bold'>{mineSpeed}</p>
               </p>
             </div>
           </div>
@@ -143,7 +144,7 @@ const Mine = () => {
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-1 right-10 bottom-24 text-lg rounded-xl'>
+          <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-1 right-10 bottom-24 text-lg rounded-xl shadow-xl shadow-gray-800'>
             {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
           </p>
 
@@ -170,7 +171,7 @@ const Mine = () => {
                   toast.success('Claim Successful 😃') // Reset mined amount
                   refetch()
                 }}
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-2 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2  bg-[#00D4FF] outline-1 outline-white left-12 bottom-24  text-black text-sm px-12 py-2 text-center transition font-bold rounded-xl shadow-lg shadow-gray-700'
               >
                 <FaHandHoldingUsd className='mt-1' />
                 Claim Mining

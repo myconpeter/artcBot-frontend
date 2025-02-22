@@ -53,7 +53,7 @@ const Refer = () => {
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
 
-      <div className='mt-3 flex flex-col items-center justify-center'>
+      <div className='mt-3 flex flex-col items-center justify-center '>
         <div className='flex'>
           <button className='p-2 text-white rounded-xl text-sm transition-all duration-300 bg-blue-300 '>
             Referrals <span className='p-1 bg-white text-black rounded-3xl'>{allRef.length}</span>
@@ -78,7 +78,7 @@ const Refer = () => {
 
       <div className='flex justify-center items-center '>
         <div className='bg mt-5 w-[95%] py-5 px-1 flex flex-col gap-4'>
-          <div className='relative p-2 w-[80%]  flex gap-4 ml-5 items-center'>
+          <div className='relative p-2 w-[80%]  bg-white  flex gap-4 ml-5 items-center rounded-2xl opacity-80'>
             <IoGiftOutline className='text-4xl bg-[#00D4FF] p-2 text-white rounded-2xl' />
             <div>
               <p className='text-sm font-semibold text-gray-400'>Refer Friends</p>
@@ -89,7 +89,7 @@ const Refer = () => {
             </div>
           </div>
 
-          <div className='relative  p-2 w-[80%]  flex gap-4 ml-5 items-center'>
+          <div className='relative  p-2 w-[80%]  bg-white  flex gap-4 ml-5 items-center rounded-2xl opacity-80'>
             <IoGiftOutline className='text-4xl bg-[#00D4FF] p-2 text-white rounded-2xl' />
             <div>
               <p className='text-sm font-semibold text-gray-400'>Refer Premium Friends</p>
@@ -109,8 +109,8 @@ const Refer = () => {
             allRef.map((refUser, index) => (
               <div key={index} className='flex  items-center justify-between w-[80%] rounded-2xl p-2 mb-1'>
                 {/* <FaUser /> */}
-                <p className='text-sm text-white'>{refUser.Username || 'Unknown User'}</p>
-                <p className='text-sm'>
+                <p className='text-sm text-white font-semibold'>{refUser.Username || 'Unknown User'}</p>
+                <p className='text-sm text-white'>
                   +
                   {refUser.TelegramPremiumUser
                     ? import.meta.env.VITE_PREMIUM_TG_USER

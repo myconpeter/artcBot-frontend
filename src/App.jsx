@@ -36,7 +36,7 @@ function App() {
           <Route path='pg-3' element={<ThirdPageWelcome />} />
         </Route>
 
-        <Route path='/' element={<BotLayout />}>
+        <Route path='/'>
           <Route
             index
             element={
@@ -45,14 +45,16 @@ function App() {
               </RouteProtector>
             }
           />
-          <Route path='mine' element={<Mine />} />
-          <Route path='refer' element={<Refer />} />
-          <Route path='wallet' element={<Wallet />} />
+          <Route element={<BotLayout />}>
+            <Route path='mine' element={<Mine />} />
+            <Route path='refer' element={<Refer />} />
+            <Route path='wallet' element={<Wallet />} />
 
-          <Route path='task' element={<TaskLayout />}>
-            <Route index element={<SocialTask />} />
-            <Route path='reward' element={<RewardTask />} />
-            <Route path='partner' element={<PatnerTask />} />
+            <Route path='task' element={<TaskLayout />}>
+              <Route index element={<SocialTask />} />
+              <Route path='reward' element={<RewardTask />} />
+              <Route path='partner' element={<PatnerTask />} />
+            </Route>
           </Route>
         </Route>
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import ArcticBgOne from '../component/background/ArcticBgOne'
+import ArcticBgTwo from '../component/background/ArcticBgTwo'
 import { useState, useEffect } from 'react'
 import { useSplashSeenMutation } from '../redux/api/UserEndPoint'
 import { useNavigate } from 'react-router'
@@ -31,7 +32,7 @@ const FirstPageWelcome = () => {
   return (
     <div className='relative flex flex-col justify-center items-center h-screen w-full overflow-hidden text-white'>
       {/* Background Animation */}
-      <ArcticBgOne className='absolute top-0 left-0 w-full h-screen z-[-1]' />
+      <ArcticBgTwo className='absolute top-0 left-0 w-full h-screen z-[-1]' />
 
       {/* Welcome Page 1: The Arctic Awaits */}
       {step === 1 && (

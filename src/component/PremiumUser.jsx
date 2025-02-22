@@ -33,7 +33,7 @@ const PremiumUser = ({ isLoading, miningPremiumUser }) => {
               transition={{ duration: 0.4, ease: 'easeOut' }}
               className='px-3 py-1 bg-[#00D4FF] text-black font-semibold text-sm rounded-xl shadow-md mr-3'
             >
-              Premium User
+              Premium
             </motion.div>
           )}
           {!isLoading && !miningPremiumUser && (
@@ -45,7 +45,7 @@ const PremiumUser = ({ isLoading, miningPremiumUser }) => {
               transition={{ duration: 0.4, ease: 'easeOut' }}
               className='px-3 py-1 bg-gray-100 font-semibold text-black text-sm rounded-xl shadow-md mr-3'
             >
-              Regular miner
+              Regular
             </motion.div>
           )}
         </AnimatePresence>

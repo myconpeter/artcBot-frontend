@@ -2,7 +2,7 @@ import './ArtcitMining.css'
 
 const ArcticMining = () => {
   return (
-    <div className='h-80 w-[90%] bg-transparent rounded-4xl'>
+    <div className='h-96 w-[90%] bg-transparent rounded-4xl'>
       <div className='waterfall'>
         <div className='water'>
           <div className='fall s medium delay light-blue'></div>

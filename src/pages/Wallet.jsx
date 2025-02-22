@@ -10,8 +10,8 @@ const Wallet = () => {
       <div>
         <img src={WalletAnimation} alt='wallet' className='absolute -top-40' />
 
-        <div className='flex flex-col items-center relative top-48'>
-          <p className='font-bold text-black text-4xl'>Connect wallet</p>
+        <div className='flex  flex-col items-center relative top-48'>
+          <p className='font-bold text-[#00D4FF] text-4xl'>Connect wallet</p>
           <p className='font-bold text-gray-300 mt-10 text-4xl'>Coming soon</p>
           {/* <p className='text-2xl mt-3'>You can now connect your wallet!</p> */}
         </div>
