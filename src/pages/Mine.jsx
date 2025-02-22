@@ -111,13 +111,13 @@ const Mine = () => {
       </div>
 
       <div className='flex justify-center items-center mt-3 '>
-        <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-32 rounded-xl text-black'>
+        <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-44 rounded-xl text-black'>
           <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
             Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
           </p>
           <div className='flex items-center justify-center gap-3'>
-            <FaShip className=' text-black text-3xl' />
-            <p className=' text-3xl font-semibold text-[#00D4FF]'>{isLoading ? ' ' : allBalance}</p>
+            <FaShip className=' text-black text-4xl' />
+            <p className=' text-4xl font-semibold text-[#00D4FF]'>{isLoading ? ' ' : allBalance}</p>
           </div>
 
           <div className='flex items-center justify-center'>
@@ -187,7 +187,7 @@ const Mine = () => {
                 className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-2 text-center transition font-bold rounded-xl'
               >
                 <GiDigDug className='text-[#00D4FF] font-bold mt-1' />
-                Mine <span className='text-[#00D4FF] font-bold'>${import.meta.env.VITE_SYMBOL}</span>
+                Start Mining
               </div>
             )}
           </div>
