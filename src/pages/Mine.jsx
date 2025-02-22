@@ -13,6 +13,7 @@ import { FaHandHoldingUsd } from 'react-icons/fa'
 import { GiDigDug } from 'react-icons/gi'
 import toast from 'react-hot-toast'
 import ArcticMining from '../component/shared/ArcticMining'
+import NotMining from '../component/shared/NotMining'
 
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
@@ -112,7 +113,7 @@ const Mine = () => {
       <div className='flex justify-center items-center mt-3 '>
         <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-32 rounded-xl text-black'>
           <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
-            Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
+            Totall <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
           </p>
           <div className='flex items-center justify-center gap-3'>
             <FaShip className=' text-black text-3xl' />
@@ -133,7 +134,11 @@ const Mine = () => {
       </div>
 
       <div className='flex justify-center mt-10 h-screen w-screen '>
-        <div className='h-80 w-[90%] bg-white rounded-4xl'></div>
+        <div className='h-80 w-[90%] bg-transparent rounded-4xl'>
+          {' '}
+          {miningStatus ? <ArcticMining /> : <p></p>}
+          {/* <NotMining /> */}
+        </div>
       </div>
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>

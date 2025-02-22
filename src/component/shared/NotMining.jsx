@@ -1,6 +1,6 @@
-import './ArtcitMining.css'
+import './NotMining.css'
 
-const ArcticMining = () => {
+const NotMining = () => {
   return (
     <div className='h-80 w-[90%] bg-transparent rounded-4xl'>
       <div className='waterfall'>
@@ -66,4 +66,4 @@ const ArcticMining = () => {
   )
 }
 
-export default ArcticMining
+export default NotMining
