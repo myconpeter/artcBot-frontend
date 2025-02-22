@@ -12,6 +12,7 @@ import { FaClock } from 'react-icons/fa'
 import { FaHandHoldingUsd } from 'react-icons/fa'
 import { GiDigDug } from 'react-icons/gi'
 import toast from 'react-hot-toast'
+import ArcticMining from '../component/shared/ArcticMining'
 
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
@@ -19,12 +20,17 @@ const Mine = () => {
   const [claimFarming] = useClaimFarmingMutation()
 
   const wallet = data?.data?.Wallet
+  const taskEarn = data?.data?.TaskEarn
+  const referralPoint = data?.data?.ReferralPoint
+  const miningAmount = data?.data?.MiningAmount
   const miningPremiumUser = data?.data?.MiningPremiumUser
   const miningStatus = data?.data?.MiningStatus
   const burnTime = data?.data?.Burn ? new Date(data?.data?.Burn).getTime() : null
   const miningEndTime = data?.data?.MiningEndTime ? new Date(data?.data?.MiningEndTime).getTime() : null
   const miningStartTime = data?.data?.MiningStartTime ? new Date(data?.data?.MiningStartTime).getTime() : null
   const username = data?.data?.Username || ' '
+
+  const allBalance = miningAmount + taskEarn + referralPoint
 
   const [countdown, setCountdown] = useState(null)
   const [burnCountdown, setBurnCountdown] = useState(null)
@@ -85,7 +91,8 @@ const Mine = () => {
 
   return (
     <div className='relative flex flex-col  h-screen w-full overflow-hidden text-white'>
-      {/* <ArcticBgOne /> */}
+      {/* <ArcticMining /> */}
+
       <ArcticBgTwo />
       <div className='flex justify-between items-center mt-2'>
         <div
@@ -100,6 +107,29 @@ const Mine = () => {
           <p className='text-white font-semibold'>{isLoading ? ' ' : username}</p>
         </div>
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
+      </div>
+
+      <div className='flex justify-center items-center mt-3 '>
+        <div className='w-[80%] bg-white opacity-75 h-20 rounded-xl text-black'>
+          <p className='text-xs text-center mt-2 font-semibold text-gray-400'>
+            Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
+          </p>
+          <div className='flex items-center justify-center gap-3'>
+            <FaShip className=' text-black text-2xl' />
+            <p className=' text-2xl font-semibold text-[#00D4FF]'>{allBalance}</p>
+          </div>
+
+          <div className='flex items-center justify-center'>
+            <div className='flex items-center justify-center gap-4'>
+              <p className='text-xs font-semibold text-gray-400'>
+                <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> per hour{' '}
+              </p>
+              <p className='text-xs flex'>
+                <FaShip className=' text-[#00D4FF] text-sm font-semibold' /> <p className='font-bold'>11.9604</p>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
