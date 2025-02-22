@@ -110,13 +110,13 @@ const Mine = () => {
       </div>
 
       <div className='flex justify-center items-center mt-3 '>
-        <div className='w-[80%] bg-white opacity-75 h-20 rounded-xl text-black'>
+        <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-32 rounded-xl text-black'>
           <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
             Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
           </p>
           <div className='flex items-center justify-center gap-3'>
-            <FaShip className=' text-black text-2xl' />
-            <p className=' text-2xl font-semibold text-[#00D4FF]'>{allBalance}</p>
+            <FaShip className=' text-black text-3xl' />
+            <p className=' text-3xl font-semibold text-[#00D4FF]'>{allBalance}</p>
           </div>
 
           <div className='flex items-center justify-center'>
@@ -133,7 +133,7 @@ const Mine = () => {
       </div>
 
       <div className='flex justify-center mt-10 h-screen w-screen '>
-        <div className='h-60 w-[70%] bg-white rounded-4xl'></div>
+        <div className='h-72 w-[70%] bg-white rounded-4xl'></div>
       </div>
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
