@@ -88,7 +88,12 @@ const Mine = () => {
       {/* <ArcticBgOne /> */}
       <ArcticBgTwo />
       <div className='flex justify-between items-center mt-2'>
-        <div className=' flex items-center gap-2 p-2 rounded-2xl'>
+        <div
+          onClick={() => {
+            toast.success(`Hello ${username}, Welcome to the ARCTIC`)
+          }}
+          className=' flex items-center gap-2 p-2 rounded-2xl'
+        >
           <div className='bg-gray-100 h-10 w-10 flex items-center justify-center rounded-2xl'>
             <FaShip className=' text-black text-2xl' />
           </div>
@@ -99,7 +104,7 @@ const Mine = () => {
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1 font-bold mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10 bottom-24 text-lg rounded-2xl'>
+          <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-1 right-10 bottom-24 text-lg rounded-xl'>
             {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
           </p>
 
@@ -108,7 +113,7 @@ const Mine = () => {
               <p> </p>
             ) : miningStatus && countdown > 0 ? (
               <motion.div
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-16 bottom-18 rounded-xl text-white px-14 py-2 text-center transition font-bold'
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-10 py-2 text-center transition font-bold rounded-xl'
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ repeat: Infinity, duration: 1 }}
               >
@@ -126,7 +131,7 @@ const Mine = () => {
                   toast.success('Claim Successful 😃') // Reset mined amount
                   refetch()
                 }}
-                className='fixed flex gap-2  bg-[#00D4FF] outline-1 outline-white left-16 bottom-18  text-black px-16 py-2 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-2 text-center transition font-bold rounded-xl'
               >
                 <FaHandHoldingUsd className='mt-1' />
                 Claim Mining
@@ -149,13 +154,13 @@ const Mine = () => {
 
           {/* Burn Timer */}
           {!miningPremiumUser && miningStatus && burnCountdown > 0 && countdown <= 0 && (
-            <p className='fixed bottom-32 left-16  text-red-500 text-sm mt-5'>
+            <p className='fixed bottom-40 left-16  text-red-500 text-sm mt-5'>
               Mined will burn if not claimed after {formatTime(burnCountdown)}
             </p>
           )}
 
           {!miningPremiumUser && burnCountdown === 0 && (
-            <p className='fixed left-10 bottom-32 text-center text-red-500 font-semibold mt-5'>Tokens burned!</p>
+            <p className='fixed left-32 bottom-40 text-center text-red-500 font-semibold mt-5'>Tokens burned!</p>
           )}
         </div>
       </div>

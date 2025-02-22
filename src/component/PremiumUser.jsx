@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaAward } from 'react-icons/fa'
+import { Link } from 'react-router'
 
 const PremiumUser = ({ isLoading, miningPremiumUser }) => {
   return (
-    <div className='flex items-center gap-2 relative'>
+    <Link to='/task/partner' className='flex items-center gap-2 relative'>
       {isLoading ? (
         <motion.span
           initial={{ opacity: 0 }}
@@ -49,7 +50,7 @@ const PremiumUser = ({ isLoading, miningPremiumUser }) => {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </Link>
   )
 }
 

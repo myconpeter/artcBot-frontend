@@ -1,12 +1,11 @@
-import { FaUser } from 'react-icons/fa'
-import { BiSolidCopy } from 'react-icons/bi'
 import { IoGiftOutline } from 'react-icons/io5'
 import { useFindRefererQuery } from '../redux/api/UserEndPoint'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import ArcticBgTwo from '../component/background/ArcticBgTwo'
 import { FaShip } from 'react-icons/fa6'
 import PremiumUser from '../component/PremiumUser'
+import toast from 'react-hot-toast'
+
 // import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 
 const Refer = () => {
@@ -40,7 +39,12 @@ const Refer = () => {
     <div className='relative flex flex-col  h-screen w-full overflow-hidden text-black'>
       <ArcticBgTwo />
       <div className='flex justify-between items-center mt-2'>
-        <div className=' flex items-center gap-2 p-2 rounded-2xl'>
+        <div
+          onClick={() => {
+            toast.success(`Hello ${username}, Welcome to the ARCTIC`)
+          }}
+          className=' flex items-center gap-2 p-2 rounded-2xl'
+        >
           <div className='bg-gray-100 h-10 w-10 flex items-center justify-center rounded-2xl'>
             <FaShip className=' text-black text-2xl' />
           </div>

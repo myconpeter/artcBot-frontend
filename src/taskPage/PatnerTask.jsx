@@ -8,7 +8,7 @@ const PatnerTask = () => {
         <div className=' mt-5 w-[95%] py-5 px-1 flex flex-col gap-4'>
           <div className='relative flex justify-center items-center '>
             <div className='relative bg-white p-3 w-[68%]  flex gap-4 ml-5 items-center rounded-l-2xl shadow-lg shadow-gray-500'>
-              <FaAward className='text-5xl text-yellow-400  rounded-2xl' />
+              <FaAward className='text-2xl text-yellow-400  rounded-2xl' />
               <div>
                 <p className='text-sm font-semibold text-black'>Become a Premium Users</p>
                 <p className='text-md'>1.5 $ton</p>
