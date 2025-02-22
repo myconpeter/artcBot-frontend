@@ -133,7 +133,7 @@ const Mine = () => {
       </div>
 
       <div className='flex justify-center mt-10 h-screen w-screen '>
-        <div className='h-72 w-[70%] bg-white rounded-4xl'></div>
+        <div className='h-80 w-[90%] bg-white rounded-4xl'></div>
       </div>
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
