@@ -111,7 +111,7 @@ const Mine = () => {
 
       <div className='flex justify-center items-center mt-3 '>
         <div className='w-[80%] bg-white opacity-75 h-20 rounded-xl text-black'>
-          <p className='text-xs text-center mt-2 font-semibold text-gray-400'>
+          <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
             Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
           </p>
           <div className='flex items-center justify-center gap-3'>
@@ -121,15 +121,19 @@ const Mine = () => {
 
           <div className='flex items-center justify-center'>
             <div className='flex items-center justify-center gap-4'>
-              <p className='text-xs font-semibold text-gray-400'>
-                <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> per hour{' '}
+              <p className='text-sm font-semibold text-gray-400'>
+                <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> per seconds
               </p>
-              <p className='text-xs flex'>
-                <FaShip className=' text-[#00D4FF] text-sm font-semibold' /> <p className='font-bold'>11.9604</p>
+              <p className='text-sm flex'>
+                <FaShip className=' text-[#00D4FF] text-sm font-semibold' /> <p className='font-bold'>{mineSpeed}</p>
               </p>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className='flex justify-center mt-10 h-screen w-screen '>
+        <div className='h-60 w-[70%] bg-white rounded-4xl'></div>
       </div>
 
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>

@@ -103,13 +103,13 @@ const Refer = () => {
       </div>
       <div className='flex items-center justify-center'>
         <div className=' mt-3 w-[95%] py-1 px-1 flex flex-col items-center justify-center gap-4 overflow-auto mb-36'>
-          <p className=''>Your Invites!</p>
+          <p className='text-[#00D4FF] font-bold'>Your Invites</p>
 
           {allRef.length > 0 ? (
             allRef.map((refUser, index) => (
               <div key={index} className='flex  items-center justify-between w-[80%] rounded-2xl p-2 mb-1'>
                 {/* <FaUser /> */}
-                <p className='text-sm'>{refUser.Username || 'Unknown User'}</p>
+                <p className='text-sm text-white'>{refUser.Username || 'Unknown User'}</p>
                 <p className='text-sm'>
                   +
                   {refUser.TelegramPremiumUser
