@@ -49,7 +49,7 @@ const Mine = () => {
   const [liveMiningAmount, setLiveMiningAmount] = useState(0)
   const [isMiningActive, setIsMiningActive] = useState(miningStatus)
   const mineSpeed = 0.01
-  const totalAmountThatCanBeMined = 0.3
+  const totalAmountThatCanBeMined = 0.6
 
   useEffect(() => {
     if (miningStatus && miningStartTime) {
