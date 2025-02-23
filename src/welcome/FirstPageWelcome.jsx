@@ -22,9 +22,9 @@ const FirstPageWelcome = () => {
   useEffect(() => {
     // Timed transitions for each step
     const timers = [
-      setTimeout(() => setStep(2), 5000), // Move to Discovery
-      setTimeout(() => setStep(3), 10000), // Move to Expedition Begins
-      setTimeout(() => setStep(4), 15000), // Show Features
+      setTimeout(() => setStep(2), 8000), // Move to Discovery
+      setTimeout(() => setStep(3), 16000), // Move to Expedition Begins
+      setTimeout(() => setStep(4), 24000), // Show Features
     ]
     return () => timers.forEach(clearTimeout)
   }, [])

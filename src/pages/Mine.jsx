@@ -7,19 +7,30 @@ import WalletIcon from '../assets/icon/walletIcon.png'
 import PremiumUser from '../component/PremiumUser'
 import ArcticBgOne from '../component/background/ArcticBgOne'
 import ArcticBgTwo from '../component/background/ArcticBgTwo'
-import { FaShip } from 'react-icons/fa6'
+import { FaBullseye, FaShip } from 'react-icons/fa6'
 import { FaClock } from 'react-icons/fa'
 import { FaHandHoldingUsd } from 'react-icons/fa'
 import { GiDigDug } from 'react-icons/gi'
 import toast from 'react-hot-toast'
 import ArcticMining from '../component/shared/ArcticMining'
-import NotMining from '../component/shared/NotMining'
-
+import InfoPopup from '../component/model/InfoPopup'
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
   const [startFarming] = useStartFarmingMutation()
   const [claimFarming] = useClaimFarmingMutation()
+  const [showPopup, setShowPopup] = useState(false)
 
+  useEffect(() => {
+    const hasSeenPopup = localStorage.getItem('arcticPopupSeen')
+    if (!hasSeenPopup) {
+      setShowPopup(true) // Show the popup only if not seen before
+    }
+  }, [])
+
+  const handleClosePopup = () => {
+    setShowPopup(false)
+    localStorage.setItem('arcticPopupSeen', 'true') // Store the popup state
+  }
   const wallet = data?.data?.Wallet
   const taskEarn = data?.data?.TaskEarn
   const referralPoint = data?.data?.ReferralPoint
@@ -92,8 +103,7 @@ const Mine = () => {
 
   return (
     <div className='relative flex flex-col  h-screen w-full overflow-hidden text-white'>
-      {/* <ArcticMining /> */}
-
+      {showPopup && <InfoPopup onClose={handleClosePopup} />} {/* <ArcticMining /> */}
       <ArcticBgTwo />
       <div className='flex justify-between items-center mt-2'>
         <div
@@ -109,7 +119,6 @@ const Mine = () => {
         </div>
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
-
       <div className='flex justify-center items-center mt-3 '>
         <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-44 rounded-xl text-black'>
           <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
@@ -133,7 +142,6 @@ const Mine = () => {
           </div>
         </div>
       </div>
-
       <div className='flex justify-center mt-10 h-screen w-screen '>
         <div className='h-80 w-[90%] bg-transparent rounded-4xl'>
           {' '}
@@ -141,10 +149,9 @@ const Mine = () => {
           {/* <NotMining /> */}
         </div>
       </div>
-
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-1 right-10 bottom-24 text-lg rounded-xl shadow-xl shadow-gray-800'>
+          <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10 bottom-24 text-lg rounded-xl shadow-xl shadow-gray-800'>
             {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
           </p>
 
@@ -153,7 +160,7 @@ const Mine = () => {
               <p> </p>
             ) : miningStatus && countdown > 0 ? (
               <motion.div
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-10 py-2 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-10 py-3 text-center transition font-bold rounded-xl'
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ repeat: Infinity, duration: 1 }}
               >
@@ -171,7 +178,7 @@ const Mine = () => {
                   toast.success('Claim Successful 😃') // Reset mined amount
                   refetch()
                 }}
-                className='fixed flex gap-2  bg-[#00D4FF] outline-1 outline-white left-12 bottom-24  text-black text-sm px-12 py-2 text-center transition font-bold rounded-xl shadow-lg shadow-gray-700'
+                className='fixed flex gap-2  bg-[#00D4FF] outline-1 outline-white left-12 bottom-24  text-black text-sm px-12 py-3 text-center transition font-bold rounded-xl shadow-lg shadow-gray-700'
               >
                 <FaHandHoldingUsd className='mt-1' />
                 Claim Mining
@@ -184,7 +191,7 @@ const Mine = () => {
                     toast.success('Mining started 😃')
                   })
                 }
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-2 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-3 text-center transition font-bold rounded-xl'
               >
                 <GiDigDug className='text-[#00D4FF] font-bold mt-1' />
                 Start Mining
