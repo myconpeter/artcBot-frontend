@@ -21,7 +21,7 @@ const Mine = () => {
   const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
-    const hasSeenPopup = localStorage.getItem('arcticPopupSeen')
+    const hasSeenPopup = localStorage.getItem('arcticPopupSeen1')
     if (!hasSeenPopup) {
       setShowPopup(true) // Show the popup only if not seen before
     }
@@ -29,7 +29,7 @@ const Mine = () => {
 
   const handleClosePopup = () => {
     setShowPopup(false)
-    localStorage.setItem('arcticPopupSeen', 'true') // Store the popup state
+    localStorage.setItem('arcticPopupSeen1', 'true') // Store the popup state
   }
   const wallet = data?.data?.Wallet
   const taskEarn = data?.data?.TaskEarn
