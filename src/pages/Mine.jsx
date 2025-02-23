@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import WalletIcon from '../assets/icon/walletIcon.png'
 import PremiumUser from '../component/PremiumUser'
-import ArcticBgOne from '../component/background/ArcticBgOne'
 import ArcticBgTwo from '../component/background/ArcticBgTwo'
 import { FaBullseye, FaShip } from 'react-icons/fa6'
 import { FaClock } from 'react-icons/fa'
@@ -55,7 +54,7 @@ const Mine = () => {
     if (miningStatus && miningStartTime) {
       const interval = setInterval(() => {
         const now = Date.now()
-        const timePassed = Math.max(now - miningStartTime, 0) / 1000 // Convert ms to sec
+        const timePassed = Math.max(now - miningStartTime, 0) / 1000
         let minedTokens = timePassed * mineSpeed
 
         minedTokens = Math.min(minedTokens, totalAmountThatCanBeMined)

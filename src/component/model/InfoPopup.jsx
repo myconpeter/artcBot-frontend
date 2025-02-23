@@ -17,6 +17,10 @@ const InfoPopup = ({ onClose }) => {
           tapping the <span className='font-semibold'>Start Mining</span> button. Earn more by completing tasks and
           inviting friends!
         </p>
+        <p className='text-sm text-red-700 mt-2 '>
+          Your Mined <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> would burn if
+          not claim after 1 hour
+        </p>
         <button onClick={onClose} className='mt-4 w-full bg-[#00D4FF] font-bold text-black py-2 rounded-md transition'>
           Got it!
         </button>
