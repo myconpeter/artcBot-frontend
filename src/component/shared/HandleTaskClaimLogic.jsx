@@ -32,7 +32,7 @@ const HandleTaskClaimLogic = ({ item }) => {
       {isProgressForClaim ? (
         <div className='h-5 w-5 border-4 border-white border-dashed rounded-full animate-spin'></div>
       ) : isClaim ? (
-        <button className='text-sm font-semibold  text-black' onClick={Claim}>
+        <button className='text-sm font-semibold  text-white' onClick={Claim}>
           Claim
         </button>
       ) : item?.category !== 'read' ? (
