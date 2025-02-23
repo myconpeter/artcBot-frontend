@@ -18,7 +18,7 @@ const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
   const [startFarming] = useStartFarmingMutation()
   const [claimFarming] = useClaimFarmingMutation()
-  const [showPopup, setShowPopup] = useState(true)
+  const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
     const hasSeenPopup = localStorage.getItem('arcticPopupSeen')
