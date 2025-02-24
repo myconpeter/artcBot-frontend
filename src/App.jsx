@@ -23,51 +23,54 @@ import AdminLayout from './layouts/AdminLayout'
 import Splash from './pages/Splash'
 import RouteProtector from './utils/RouteProtector'
 import Start from './pages/Start'
+import { TonConnectUIProvider } from '@tonconnect/ui-react'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/splash' element={<Splash />} />
+    <TonConnectUIProvider manifestUrl={import.meta.env.VITE_MANIFEST}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/splash' element={<Splash />} />
 
-        <Route path='/new-comer' element={<StartLayout />}>
-          <Route index element={<FirstPageWelcome />} />
-          <Route path='pg-2' element={<SecoundPageWelcome />} />
-          <Route path='pg-3' element={<ThirdPageWelcome />} />
-        </Route>
+          <Route path='/new-comer' element={<StartLayout />}>
+            <Route index element={<FirstPageWelcome />} />
+            <Route path='pg-2' element={<SecoundPageWelcome />} />
+            <Route path='pg-3' element={<ThirdPageWelcome />} />
+          </Route>
 
-        <Route path='/'>
-          <Route
-            index
-            element={
-              <RouteProtector>
-                <Start />
-              </RouteProtector>
-            }
-          />
-          <Route element={<BotLayout />}>
-            <Route path='mine' element={<Mine />} />
-            <Route path='refer' element={<Refer />} />
-            <Route path='wallet' element={<Wallet />} />
+          <Route path='/'>
+            <Route
+              index
+              element={
+                <RouteProtector>
+                  <Start />
+                </RouteProtector>
+              }
+            />
+            <Route element={<BotLayout />}>
+              <Route path='mine' element={<Mine />} />
+              <Route path='refer' element={<Refer />} />
+              <Route path='wallet' element={<Wallet />} />
 
-            <Route path='task' element={<TaskLayout />}>
-              <Route index element={<SocialTask />} />
-              <Route path='reward' element={<RewardTask />} />
-              <Route path='partner' element={<PatnerTask />} />
+              <Route path='task' element={<TaskLayout />}>
+                <Route index element={<SocialTask />} />
+                <Route path='reward' element={<RewardTask />} />
+                <Route path='partner' element={<PatnerTask />} />
+              </Route>
             </Route>
           </Route>
-        </Route>
 
-        <Route path='/admin' element={<AdminLayout />}>
-          <Route index element={<AdminLogin />} />
-          <Route path='user' element={<UserPage />} />
-          <Route path='task' element={<TaskPage />} />
-          <Route path='setting' element={<SettingPage />} />
-        </Route>
+          <Route path='/admin' element={<AdminLayout />}>
+            <Route index element={<AdminLogin />} />
+            <Route path='user' element={<UserPage />} />
+            <Route path='task' element={<TaskPage />} />
+            <Route path='setting' element={<SettingPage />} />
+          </Route>
 
-        <Route path='*' element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+      </BrowserRouter>
+    </TonConnectUIProvider>
   )
 }
 

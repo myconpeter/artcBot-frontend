@@ -19,6 +19,7 @@ const FirstPageWelcome = () => {
     navigate('/mine', { replace: true }) // Redirect user
   }
 
+
   useEffect(() => {
     // Timed transitions for each step
     const timers = [
