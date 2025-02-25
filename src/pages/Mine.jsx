@@ -3,7 +3,6 @@ import { useMyInfoQuery } from '../redux/api/UserEndPoint'
 import { useStartFarmingMutation, useClaimFarmingMutation } from '../redux/api/FarmingEndpoint'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import WalletIcon from '../assets/icon/walletIcon.png'
 import PremiumUser from '../component/PremiumUser'
 import ArcticBgTwo from '../component/background/ArcticBgTwo'
 import { FaBullseye, FaShip } from 'react-icons/fa6'
@@ -13,6 +12,9 @@ import { GiDigDug } from 'react-icons/gi'
 import toast from 'react-hot-toast'
 import ArcticMining from '../component/shared/ArcticMining'
 import InfoPopup from '../component/model/InfoPopup'
+import { FaWallet } from 'react-icons/fa'
+import { FaXmark } from 'react-icons/fa6'
+import { IoMdCheckmark } from 'react-icons/io'
 const Mine = () => {
   const { data, isLoading, refetch } = useMyInfoQuery()
   const [startFarming] = useStartFarmingMutation()
@@ -31,6 +33,7 @@ const Mine = () => {
     localStorage.setItem('arcticPopupSeen1', 'true') // Store the popup state
   }
   const wallet = data?.data?.Wallet
+  console.log(wallet === 'Not Connected')
   const taskEarn = data?.data?.TaskEarn
   const referralPoint = data?.data?.ReferralPoint
   const miningAmount = data?.data?.MiningAmount
@@ -47,8 +50,8 @@ const Mine = () => {
   const [burnCountdown, setBurnCountdown] = useState(null)
   const [liveMiningAmount, setLiveMiningAmount] = useState(0)
   const [isMiningActive, setIsMiningActive] = useState(miningStatus)
-  const mineSpeed = 0.01
-  const totalAmountThatCanBeMined = 0.6
+  const mineSpeed = 0.001
+  const totalAmountThatCanBeMined = 28.8
 
   useEffect(() => {
     if (miningStatus && miningStartTime) {
@@ -116,6 +119,14 @@ const Mine = () => {
           </div>
           <p className='text-white font-semibold'>{isLoading ? ' ' : username}</p>
         </div>
+        <Link to='/wallet' className=' flex gap-1 bg-black rounded-2xl p-2 '>
+          <FaWallet className='text-white' />
+          {wallet === 'Not Connected' ? (
+            <FaXmark className='text-red-600' />
+          ) : (
+            <IoMdCheckmark className='text-green-500' />
+          )}
+        </Link>
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
       <div className='flex justify-center items-center mt-3 '>
@@ -151,7 +162,7 @@ const Mine = () => {
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
           <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10 bottom-24 text-lg rounded-xl shadow-xl shadow-gray-800'>
-            {liveMiningAmount.toFixed(2)} <FaShip className='mt-1' />
+            {liveMiningAmount.toFixed(3)} <FaShip className='mt-1' />
           </p>
 
           <div className='flex mt-3 w-72'>

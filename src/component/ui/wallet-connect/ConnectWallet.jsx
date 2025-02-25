@@ -1,22 +1,52 @@
 import { useTonConnectUI } from '@tonconnect/ui-react'
-import { PiHandWithdrawFill } from 'react-icons/pi'
 import { FaWallet } from 'react-icons/fa'
 import { AiOutlineDisconnect } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { useConnectWalletMutation } from '../../../redux/api/WalletApi'
+import { useDisconnectWalletMutation } from '../../../redux/api/WalletApi'
 
 const ConnectWallet = () => {
+  const navigate = useNavigate()
   const [tonConnectUI] = useTonConnectUI()
   const [isConnected, setIsConnected] = useState(tonConnectUI?.connected)
 
+  const [ConnectWallet] = useConnectWalletMutation()
+  const [DisconnectWallet] = useDisconnectWalletMutation()
+
   useEffect(() => {
-    setIsConnected(tonConnectUI?.connected)
-  }, [tonConnectUI?.connected]) // Updates when the wallet state changes
+    if (tonConnectUI?.connected) {
+      setIsConnected(true)
+
+      const walletData = tonConnectUI?.account?.address // Correct format
+
+      //   console.log(walletData)
+
+      ConnectWallet({ walletData }) // Send correct payload
+        .unwrap()
+        .then(() => {})
+        .catch((error) => {
+          console.error('Backend error:', error)
+        })
+    }
+  }, [tonConnectUI?.connected])
+
+  const handleConnect = async () => {
+    try {
+      await tonConnectUI.openModal()
+      navigate('/mine')
+    } catch (error) {
+      toast.error('Wallet Connection Failed')
+    }
+  }
 
   const handleDisconnect = async () => {
     try {
       await tonConnectUI.disconnect()
       toast.success('Wallet disconnected successfully!')
+      DisconnectWallet()
+      navigate('/mine', { replace: true })
     } catch (error) {
       toast.error('Failed to disconnect wallet!')
       console.error('Disconnect error:', error)
@@ -64,7 +94,7 @@ const ConnectWallet = () => {
           </div>
 
           <div
-            onClick={() => tonConnectUI.openModal()}
+            onClick={handleConnect}
             className='bg-[#00D4FF] mt-4 bg-opacity-40 w-[60%] text-white font-poppins text-sm font-normal flex items-center justify-center p-3 rounded-full mx-auto my-2 gap-2 cursor-pointer'
           >
             <FaWallet className='text-xl text-black' />
