@@ -66,7 +66,11 @@ const ConnectWallet = () => {
             </div>
             <div className='text-black flex justify-around items-center mt-4'>
               <p className='font-semibold'>Wallet: </p>
-              <p>{String(tonConnectUI?.account?.publicKey).slice(0, 8) + '...'}</p>
+              <p>
+                {String(tonConnectUI?.account?.publicKey).slice(0, 4) +
+                  '****' +
+                  String(tonConnectUI?.account?.publicKey).slice(-4)}
+              </p>
             </div>
           </div>
 
