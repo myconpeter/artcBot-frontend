@@ -54,6 +54,10 @@ const Mine = () => {
   const totalAmountThatCanBeMined = 28.8
 
   useEffect(() => {
+    refetch() // Fetch latest data when Mine page loads
+  }, [])
+
+  useEffect(() => {
     if (miningStatus && miningStartTime) {
       const interval = setInterval(() => {
         const now = Date.now()
@@ -119,18 +123,18 @@ const Mine = () => {
           </div>
           <p className='text-white font-semibold'>{isLoading ? ' ' : username}</p>
         </div>
-        <Link to='/wallet' className=' flex gap-1 bg-black rounded-2xl p-2 '>
+        <Link to='/wallet' className=' flex items-center gap-1 bg-transparent rounded-2xl p-2 '>
           <FaWallet className='text-white' />
           {wallet === 'Not Connected' ? (
-            <FaXmark className='text-red-600' />
+            <FaXmark className='text-red-600 text-xs' />
           ) : (
-            <IoMdCheckmark className='text-green-500' />
+            <IoMdCheckmark className='text-green-500 text-xs' />
           )}
         </Link>
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
       <div className='flex justify-center items-center mt-3 '>
-        <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-44 rounded-xl text-black'>
+        <div className='w-[80%] flex flex-col items-center justify-center bg-white opacity-75 h-[130%] rounded-xl text-black'>
           <p className='text-sm text-center mt-2 font-semibold text-gray-400'>
             Total <span className='text-[#00D4FF] font-semibold'>${import.meta.env.VITE_SYMBOL}</span> mined
           </p>
@@ -161,7 +165,7 @@ const Mine = () => {
       </div>
       <div className='mt-5 flex flex-col items-center  fixed bottom-14'>
         <div className='relative flex flex-row-reverse  justify-center w-[90%]  items-center'>
-          <p className='fixed flex items justify-center gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10 bottom-24 text-lg rounded-xl shadow-xl shadow-gray-800'>
+          <p className='fixed flex items justify-center font-bold gap-1   mt-5 text-black bg-[#00D4FF] px-3 py-2 right-10 bottom-24 text-lg rounded-xl shadow-xl shadow-gray-800'>
             {liveMiningAmount.toFixed(3)} <FaShip className='mt-1' />
           </p>
 
@@ -170,7 +174,7 @@ const Mine = () => {
               <p> </p>
             ) : miningStatus && countdown > 0 ? (
               <motion.div
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-10 py-3 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2 items-center justify-center bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm w-[50%] py-3 text-center transition font-bold rounded-xl'
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ repeat: Infinity, duration: 1 }}
               >
@@ -188,7 +192,7 @@ const Mine = () => {
                   toast.success('Claim Successful 😃') // Reset mined amount
                   refetch()
                 }}
-                className='fixed flex gap-2  bg-[#00D4FF] outline-1 outline-white left-12 bottom-24  text-black text-sm px-12 py-3 text-center transition font-bold rounded-xl shadow-lg shadow-gray-700'
+                className='fixed flex gap-2 items-center justify-center  bg-[#00D4FF] outline-1 outline-white left-12 bottom-24  text-black text-sm py-3 text-center transition font-bold rounded-xl shadow-lg shadow-gray-700'
               >
                 <FaHandHoldingUsd className='mt-1' />
                 Claim Mining
@@ -201,7 +205,7 @@ const Mine = () => {
                     toast.success('Mining started 😃')
                   })
                 }
-                className='fixed flex gap-2  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm px-12 py-3 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2 items-center justify-center  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm py-3 text-center transition font-bold rounded-xl'
               >
                 <GiDigDug className='text-[#00D4FF] font-bold mt-1' />
                 Start Mining

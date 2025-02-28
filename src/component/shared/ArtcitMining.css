@@ -14,12 +14,12 @@ body {
 .waterfall {
   background: #6cbcd4;
   border-radius: 5px;
-  height: 350px;
+  height: 35%;
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
+  width: 70%;
   margin-top: 20px;
 }
 

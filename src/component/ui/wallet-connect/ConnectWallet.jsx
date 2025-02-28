@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { useConnectWalletMutation } from '../../../redux/api/WalletApi'
 import { useDisconnectWalletMutation } from '../../../redux/api/WalletApi'
+import WalletAnimation from '../../../assets/icon/walletAnimation.gif'
 
 const ConnectWallet = () => {
   const navigate = useNavigate()
@@ -55,8 +56,9 @@ const ConnectWallet = () => {
 
   return (
     <div className='flex items-start justify-center h-screen w-screen '>
+      <img src={WalletAnimation} alt='wallet' className='absolute -top-40' />
       {isConnected ? (
-        <div className='bg-white h-[30%] w-[90%] mt-10 rounded-2xl opacity-85'>
+        <div className='bg-white h-[30%] w-[90%] mt-20 rounded-2xl opacity-85'>
           <p className='text-black text-center font-semibold text-2xl mt-5'>You can now connect wallet</p>
 
           <div className='flex flex-col justify-center relative mt-3'>

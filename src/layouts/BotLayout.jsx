@@ -42,7 +42,7 @@ const BotLayout = () => {
         </NavLink>
       </nav>
 
-      <Outlet />
+      <Outlet key={window.location.pathname} />
     </div>
   )
 }
