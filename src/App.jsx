@@ -24,6 +24,7 @@ import Splash from './pages/Splash'
 import RouteProtector from './utils/RouteProtector'
 import Start from './pages/Start'
 import { TonConnectUIProvider } from '@tonconnect/ui-react'
+// lolllo
 
 function App() {
   return (
