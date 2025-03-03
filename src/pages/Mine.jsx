@@ -192,7 +192,7 @@ const Mine = () => {
                   toast.success('Claim Successful 😃') // Reset mined amount
                   refetch()
                 }}
-                className='fixed flex gap-2 items-center justify-center  bg-[#00D4FF] outline-1 outline-white left-12 bottom-24  text-black text-sm py-3 text-center transition font-bold rounded-xl shadow-lg shadow-gray-700'
+                className='fixed flex gap-2 items-center justify-center bg-[#00D4FF] outline-1 outline-black left-12 bottom-24  text-black text-sm w-[50%] py-3 text-center transition font-bold rounded-xl'
               >
                 <FaHandHoldingUsd className='mt-1' />
                 Claim Mining
@@ -205,7 +205,7 @@ const Mine = () => {
                     toast.success('Mining started 😃')
                   })
                 }
-                className='fixed flex gap-2 items-center justify-center  bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm py-3 text-center transition font-bold rounded-xl'
+                className='fixed flex gap-2 items-center justify-center bg-transparent outline-1 outline-[#00D4FF] left-12 bottom-24  text-white text-sm w-[50%] py-3 text-center transition font-bold rounded-xl'
               >
                 <GiDigDug className='text-[#00D4FF] font-bold mt-1' />
                 Start Mining

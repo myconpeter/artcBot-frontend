@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useConnectWalletMutation } from '../../../redux/api/WalletApi'
 import { useDisconnectWalletMutation } from '../../../redux/api/WalletApi'
 import WalletAnimation from '../../../assets/icon/walletAnimation.gif'
+// import { Address } from '@ton/ton'
 
 const ConnectWallet = () => {
   const navigate = useNavigate()
@@ -16,11 +17,23 @@ const ConnectWallet = () => {
   const [ConnectWallet] = useConnectWalletMutation()
   const [DisconnectWallet] = useDisconnectWalletMutation()
 
+  const rawAddress = tonConnectUI?.account?.address
+
+  if (rawAddress) {
+    console.log(rawAddress)
+  }
+
   useEffect(() => {
     if (tonConnectUI?.connected) {
       setIsConnected(true)
 
+      console.log(tonConnectUI?.account?.publicKey)
+
       const walletData = tonConnectUI?.account?.address // Correct format
+      // const rawAddress = walletData
+
+      // const isValid = Address.isFriendly(rawAddress)
+      // console.log(isValid ? 'Valid TON Address' : 'Invalid Address')
 
       //   console.log(walletData)
 
