@@ -123,14 +123,16 @@ const Mine = () => {
           </div>
           <p className='text-white font-semibold'>{isLoading ? ' ' : username}</p>
         </div>
-        <Link to='/wallet' className=' flex items-center gap-1 bg-transparent rounded-2xl p-2 '>
+
+        {/* when connect wallet is active */}
+        {/* <Link to='/wallet' className=' flex items-center gap-1 bg-transparent rounded-2xl p-2 '>
           <FaWallet className='text-white' />
           {wallet === 'Not Connected' ? (
             <FaXmark className='text-red-600 text-xs' />
           ) : (
             <IoMdCheckmark className='text-green-500 text-xs' />
           )}
-        </Link>
+        </Link> */}
         <PremiumUser isLoading={isLoading} miningPremiumUser={miningPremiumUser} />
       </div>
       <div className='flex justify-center items-center mt-3 '>
